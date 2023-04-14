@@ -1,0 +1,9 @@
+.test {
+  background-color: red;
+
+  @apply py-8;
+}
+
+.test2 {
+  color: green;
+}
