@@ -1,15 +1,16 @@
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
+import { Footer } from "../footer";
+import { Header } from "../header";
+import styles from "./layout.module.css";
 
-interface ILayoutProps {
-  //
-}
-
-const Layout = ({ children }: PropsWithChildren<ILayoutProps>): JSX.Element => {
+export const Layout = ({ children }: PropsWithChildren): JSX.Element => {
   return (
-    <>
-      <main>{children}</main>
-    </>
+    <div id="layout" className={styles.layout}>
+      <Header />
+      <main id="main" className={styles.main}>
+        {children}
+      </main>
+      <Footer />
+    </div>
   );
 };
-
-export default Layout;
