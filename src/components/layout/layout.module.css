@@ -3,5 +3,5 @@
 }
 
 .main {
-  @apply grow px-4 py-2;
+  @apply grow p-4 flex flex-col justify-stretch;
 }

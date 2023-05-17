@@ -1,0 +1,11 @@
+.main {
+  @apply h-full w-full max-w-full flex-grow;
+}
+
+.controls {
+  @apply flex gap-2 mb-4;
+}
+
+.controls button {
+  @apply p-4 py-2 border-2 border-slate-400;
+}
