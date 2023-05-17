@@ -1,0 +1,3 @@
+.main {
+  @apply resize-none text-slate-950 w-full h-96 font-mono;
+}

@@ -1,0 +1,9 @@
+.main {
+  @apply font-mono;
+
+  background-color: var(--background-color-lighter);
+}
+
+.main td {
+  @apply p-4;
+}

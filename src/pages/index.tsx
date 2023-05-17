@@ -1,11 +1,11 @@
-import { Window } from "@/components/window";
+import { Editor } from "@/components/editor";
 
 interface IHomeProps {}
 
 const Home = ({}: IHomeProps): JSX.Element => {
   return (
     <>
-      <Window />
+      <Editor />
     </>
   );
 };
