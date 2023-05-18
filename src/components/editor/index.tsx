@@ -2,11 +2,12 @@ import { useCallback, useEffect, useState } from "react";
 import { TextEdit } from "../text-edit";
 import { TextPreview } from "../text-preview";
 import styles from "./editor.module.css";
+import { testMd } from "./test-md";
 
 interface IEditorProps {}
 
 export const Editor = ({}: IEditorProps): JSX.Element => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState(testMd);
 
   enum TextMode {
     "edit",
@@ -30,7 +31,7 @@ export const Editor = ({}: IEditorProps): JSX.Element => {
       document.body.removeEventListener("keydown", listenForShortcuts);
   }, [switchTextMode]);
   return (
-    <>
+    <div className={styles.comp}>
       <div className={styles.controls}>
         <button onClick={switchTextMode}>{"Edit/Preview"}</button>
       </div>
@@ -39,6 +40,6 @@ export const Editor = ({}: IEditorProps): JSX.Element => {
       ) : (
         <TextPreview source={text} />
       )}
-    </>
+    </div>
   );
 };

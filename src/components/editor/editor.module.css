@@ -1,5 +1,5 @@
-.columns {
-  @apply h-full w-full max-w-full flex-grow;
+.comp {
+  @apply flex-grow flex flex-col;
 }
 
 .controls {

@@ -1,9 +1,14 @@
-.main {
-  @apply font-mono;
+.comp {
+  @apply flex-grow grid gap-2;
+
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+}
+
+.column {
+  @apply p-4 rounded-lg border-2 border-zinc-800 overflow-scroll inline-block;
 
   background-color: var(--background-color-lighter);
 }
 
-.main td {
-  @apply p-4;
+.preview {
 }

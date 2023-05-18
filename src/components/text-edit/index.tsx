@@ -8,7 +8,7 @@ interface ITextEditProps {
 export const TextEdit = ({ text, setText }: ITextEditProps): JSX.Element => {
   return (
     <textarea
-      className={styles.main}
+      className={styles.comp}
       value={text}
       onChange={(e) => setText(e.target.value)}
     />

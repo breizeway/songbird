@@ -20,16 +20,12 @@ export const TextPreview = ({ source }: ITextPreviewProps): JSX.Element => {
     numColumns > MIN_NUM_PANES && _setNumColumns(numColumns - 1);
 
   return (
-    <table className={styles.main}>
-      <tbody>
-        <tr>
-          {[...Array(numColumns)].map((idx) => (
-            <td key={idx}>
-              <MarkdownPreview source={source} />
-            </td>
-          ))}
-        </tr>
-      </tbody>
-    </table>
+    <div className={styles.comp}>
+      {[...Array(numColumns)].map((idx) => (
+        <div key={idx} className={styles.column}>
+          <MarkdownPreview source={source} className={styles.preview} />
+        </div>
+      ))}
+    </div>
   );
 };
