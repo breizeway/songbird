@@ -7,5 +7,7 @@
 }
 
 .controls button {
-  @apply p-4 py-2 border-2 border-slate-400;
+  @apply p-4 py-2 rounded-sm bg-amber-400 shadow-sm;
+
+  color: var(--content-color-dark);
 }

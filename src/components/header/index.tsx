@@ -5,7 +5,7 @@ interface IHeaderProps {}
 export const Header = ({}: IHeaderProps): JSX.Element => {
   return (
     <header id="header" className={styles.header}>
-      TONIX
+      my lil lyrics site
     </header>
   );
 };

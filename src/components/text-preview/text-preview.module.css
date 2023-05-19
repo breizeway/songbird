@@ -1,14 +1,16 @@
 .comp {
-  @apply flex-grow grid gap-2;
+  @apply flex-grow grid gap-4 h-full max-h-full;
 
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  grid-template-rows: 100%;
 }
 
 .column {
-  @apply p-4 rounded-lg border-2 border-zinc-800 overflow-scroll inline-block;
+  @apply p-4 rounded-md overflow-scroll shadow-md;
 
-  background-color: var(--background-color-lighter);
+  background-color: var(--background-color-fore);
 }
 
 .preview {
+  @apply font-mono;
 }

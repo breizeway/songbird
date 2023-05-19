@@ -3,18 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --background-color: #fff;
-  --background-color-lighter: #eee;
-  --content-color: #000;
-  --content-color-lighter: #333;
+  --content-color-light: #fff;
+  --content-color-dark: #040404;
+
+  --background-color-fore: #f4f4f4;
+  --background-color: #e2e2e2;
+  --background-color-back: #d6d6d6;
+  --content-color: var(--content-color-dark);
+  --content-color-reverse: var(--content-color-light);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background-color: #000;
-    --background-color-lighter: #141414;
-    --content-color: #fff;
-    --content-color-lighter: #ddd;
+    --background-color-fore: #313131;
+    --background-color: #262626;
+    --background-color-back: #1a1a1a;
+    --content-color: var(--content-color-light);
+    --content-color-reverse: var(--content-color-dark);
   }
 }
 
@@ -45,4 +50,8 @@ h5 {
 
 h6 {
   @apply text-lg;
+}
+
+a {
+  @apply text-amber-600 hover:underline;
 }
