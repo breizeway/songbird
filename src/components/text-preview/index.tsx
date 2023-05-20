@@ -1,30 +1,51 @@
-import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { TextPreviewColumn } from "../text-preview-column";
 import styles from "./text-preview.module.css";
 
-const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
-  ssr: false,
-});
+export interface ScrollVals {
+  containerHeight: number;
+  contentHeight: number;
+}
 
 interface ITextPreviewProps {
   source: string;
 }
 
 export const TextPreview = ({ source }: ITextPreviewProps): JSX.Element => {
-  const INIT_NUM_PANES = 3;
+  const INIT_NUM_PANES = 1;
   const MIN_NUM_PANES = 1;
 
   const [numColumns, _setNumColumns] = useState(INIT_NUM_PANES);
-  const incrementNumColumns = () => _setNumColumns(numColumns + 1);
-  const decrementNumColumns = () =>
-    numColumns > MIN_NUM_PANES && _setNumColumns(numColumns - 1);
+  const setNumColumns = (newNumColumns: number) => {
+    _setNumColumns(
+      newNumColumns < MIN_NUM_PANES ? MIN_NUM_PANES : newNumColumns
+    );
+  };
+
+  const [scrollVals, setScrollVals] = useState<ScrollVals>({
+    containerHeight: 0,
+    contentHeight: 0,
+  });
+  useEffect(() => {
+    if (Object.values(scrollVals).some((val) => val > 0)) {
+      const newNumColumns = Math.ceil(
+        scrollVals.contentHeight / scrollVals.containerHeight
+      );
+      setNumColumns(newNumColumns);
+    }
+  }, [scrollVals]);
 
   return (
     <div className={styles.comp}>
-      {[...Array(numColumns)].map((idx) => (
-        <div key={idx} className={styles.column}>
-          <MarkdownPreview source={source} className={styles.preview} />
-        </div>
+      {[...Array(numColumns)].map((_, idx) => (
+        <TextPreviewColumn
+          key={idx}
+          source={source}
+          columnIndex={idx}
+          numColumns={numColumns}
+          scrollVals={scrollVals}
+          setScrollVals={setScrollVals}
+        />
       ))}
     </div>
   );
