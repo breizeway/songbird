@@ -1,7 +1,7 @@
 .layout {
-  @apply flex flex-col justify-between min-h-screen w-screen;
+  @apply flex flex-col min-h-screen max-h-screen w-screen;
 }
 
 .main {
-  @apply grow p-4 flex flex-col justify-stretch;
+  @apply grow p-4 flex flex-col max-h-full;
 }

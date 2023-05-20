@@ -28,6 +28,10 @@ html {
   color: var(--content-color);
 }
 
+body {
+  @apply overscroll-none;
+}
+
 h1 {
   @apply text-5xl;
 }

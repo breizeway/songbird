@@ -1,5 +1,5 @@
 .comp {
-  @apply flex-grow flex flex-col;
+  @apply grow flex flex-col;
 }
 
 .controls {
