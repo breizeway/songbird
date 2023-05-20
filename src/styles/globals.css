@@ -3,18 +3,59 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 255, 255, 255;
+  --content-color-light: #fff;
+  --content-color-dark: #040404;
+
+  --background-color-fore: #f4f4f4;
+  --background-color: #e2e2e2;
+  --background-color-back: #d6d6d6;
+  --content-color: var(--content-color-dark);
+  --content-color-reverse: var(--content-color-light);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-rgb: 0, 0, 0;
+    --background-color-fore: #313131;
+    --background-color: #262626;
+    --background-color-back: #1a1a1a;
+    --content-color: var(--content-color-light);
+    --content-color-reverse: var(--content-color-dark);
   }
 }
 
 html {
-  background-color: rgb(var(--background-rgb));
-  color: rgb(var(--foreground-rgb));
+  background-color: var(--background-color);
+  color: var(--content-color);
+}
+
+body {
+  @apply overscroll-none;
+}
+
+h1 {
+  @apply text-5xl;
+}
+
+h2 {
+  @apply text-4xl;
+}
+
+h3 {
+  @apply text-3xl;
+}
+
+h4 {
+  @apply text-2xl;
+}
+
+h5 {
+  @apply text-xl;
+}
+
+h6 {
+  @apply text-lg;
+}
+
+a {
+  @apply text-amber-600 hover:underline;
 }

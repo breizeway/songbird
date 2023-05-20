@@ -1,10 +1,13 @@
-import classNames from "classnames";
-import styles from "./index.module.css";
+import { Editor } from "@/components/editor";
 
 interface IHomeProps {}
 
 const Home = ({}: IHomeProps): JSX.Element => {
-  return <div className={classNames(styles.home)}>home page</div>;
+  return (
+    <>
+      <Editor />
+    </>
+  );
 };
 
 export default Home;

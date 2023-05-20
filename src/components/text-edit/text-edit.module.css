@@ -1,0 +1,6 @@
+.comp {
+  @apply resize-none text-slate-950 w-full flex-grow font-mono rounded-md p-4 shadow-inner outline-none;
+
+  background-color: var(--background-color-back);
+  color: var(--content-color);
+}
