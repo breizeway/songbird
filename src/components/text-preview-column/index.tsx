@@ -24,14 +24,21 @@ export const TextPreviewColumn = ({
 }: ITextPreviewColumnProps): JSX.Element => {
   const [previewRendered, setPreviewRendered] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
 
   // calculate scroll height values and sent back to parent comp
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
-    if (columnIndex === 0 && previewRendered && !!scrollContainer) {
+    const preview = previewRef.current;
+    if (
+      columnIndex === 0 &&
+      previewRendered &&
+      !!scrollContainer &&
+      !!preview
+    ) {
       setScrollVals({
         containerHeight: scrollContainer.offsetHeight,
-        contentHeight: scrollContainer.scrollHeight,
+        contentHeight: preview.offsetHeight,
       });
     }
   }, [columnIndex, previewRendered, setScrollVals, numColumns]);
@@ -46,51 +53,37 @@ export const TextPreviewColumn = ({
     }
   }, [columnIndex, previewRendered, setScrollVals, numColumns, scrollVals]);
 
-  // whitespace to add at the bottom of last column
-  // const [whitespaceHeight, setWhitespaceHeight] = useState(0)
-  // const Whitespace = () => {
-  //   const percentWhitespaceNeeded: number = Math.ceil(
-  //     (((scrollVals.contentHeight || 0) % (scrollVals.containerHeight || 0)) /
-  //       (scrollVals.containerHeight || 0)) *
-  //       100
-  //   );
-  //   const height = `${percentWhitespaceNeeded}%`;
-  //   console.log(`:::HEIGHT::: `, height);
-  //   return (
-  //     <>{columnIndex === numColumns - 1 ? <div style={{ height }} /> : null}</>
-  //   );
-  // };
+  // get percentage of of last container is content to fill the rest with whitespace
   const calcWhitespace = () => {
-    // if (
-    //   Object.values(scrollVals).some((val) => val === 0) ||
-    //   columnIndex === numColumns - 1
-    // )
-    return 0;
-    // console.log(`:::SCROLLVALS::: `, scrollVals);
+    if (
+      columnIndex < numColumns - 1 ||
+      Object.values(scrollVals).some((val) => val === 0)
+    )
+      return 0;
 
-    // const lastColHeight = scrollVals.contentHeight % scrollVals.containerHeight;
-    // console.log(`:::LASTCOLHEIGHT::: `, lastColHeight);
-    // const percentWhitespaceNeeded =
-    //   ((scrollVals.containerHeight - lastColHeight) /
-    //     scrollVals.containerHeight) *
-    //   100;
-    // console.log(`:::PERCENTWHITESPACENEEDED::: `, percentWhitespaceNeeded);
+    const lastColHeight = scrollVals.contentHeight % scrollVals.containerHeight;
+    const percentWhitespaceNeeded =
+      ((scrollVals.containerHeight - lastColHeight) /
+        scrollVals.containerHeight) *
+      100;
 
-    // return Math.floor(percentWhitespaceNeeded) - 1;
+    return percentWhitespaceNeeded;
   };
 
   return (
     <div className={styles.comp}>
       <div className={styles.scrollContainer} ref={scrollContainerRef}>
-        <MarkdownPreview
-          source={source}
-          className={styles.preview}
-          rehypeRewrite={(node) => {
-            if (node.type === "root") {
-              setTimeout(() => setPreviewRendered(true));
-            }
-          }}
-        />
+        <div ref={previewRef}>
+          <MarkdownPreview
+            source={source}
+            className={styles.preview}
+            rehypeRewrite={(node) => {
+              if (node.type === "root") {
+                setTimeout(() => setPreviewRendered(true));
+              }
+            }}
+          />
+        </div>
         <div style={{ height: `${calcWhitespace()}%` }} />
       </div>
     </div>
