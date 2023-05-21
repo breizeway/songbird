@@ -28,7 +28,7 @@ export const TextPreviewMd = ({
       className={styles.comp}
       source={source}
       rehypeRewrite={(node, index, parent) => {
-        console.log(`:::NODE::: `, node);
+        // console.log(`:::NODE::: `, node);
         if (node.type === "root") {
           setTimeout(() => setPreviewRendered(true));
         }

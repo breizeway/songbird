@@ -5,18 +5,20 @@ import styles from "./text-preview-column.module.css";
 
 interface ITextPreviewColumnProps {
   source: string;
-  columnIndex: number;
-  numColumns: number;
-  scrollVals: ScrollVals;
+  isFirstCol: boolean;
+  isLastCol: boolean;
   setScrollVals: (scrollVals: ScrollVals) => void;
+  scrollToCoord: number;
+  lastScrollToCoord: number;
 }
 
 export const TextPreviewColumn = ({
   source,
-  columnIndex,
-  numColumns,
-  scrollVals,
+  isFirstCol,
+  isLastCol,
   setScrollVals,
+  scrollToCoord,
+  lastScrollToCoord,
 }: ITextPreviewColumnProps): JSX.Element => {
   const [previewRendered, setPreviewRendered] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -27,7 +29,7 @@ export const TextPreviewColumn = ({
     const scrollContainer = scrollContainerRef.current;
     const previewContainer = previewContainerRef.current;
     if (
-      columnIndex === 0 &&
+      isFirstCol &&
       previewRendered &&
       !!scrollContainer &&
       !!previewContainer
@@ -37,34 +39,30 @@ export const TextPreviewColumn = ({
         contentHeight: previewContainer.offsetHeight,
       });
     }
-  }, [columnIndex, previewRendered, setScrollVals, numColumns]);
+  }, [isFirstCol, previewRendered, setScrollVals, lastScrollToCoord]);
 
   // scroll to the correct place after additional columns are added
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
-    if (columnIndex !== 0 && previewRendered && !!scrollContainer) {
-      const topOffset = columnIndex * scrollVals.containerHeight;
-      const scrollToOptions: ScrollToOptions = { top: topOffset };
-      scrollContainer.scrollTo(scrollToOptions);
+    if (!isFirstCol && previewRendered && !!scrollContainer) {
+      scrollContainer.scrollTo({ top: scrollToCoord });
     }
-  }, [columnIndex, previewRendered, setScrollVals, numColumns, scrollVals]);
+  }, [isFirstCol, previewRendered, scrollToCoord, lastScrollToCoord]);
 
-  // get percentage of of last container is content to fill the rest with whitespace
-  const calcWhitespace = () => {
-    if (
-      columnIndex < numColumns - 1 ||
-      Object.values(scrollVals).some((val) => val === 0)
-    )
-      return 0;
+  // whitespace to add to the last column so it cans scroll down far enough
+  const Whitespace = () => {
+    const scrollContainer = scrollContainerRef.current;
+    const previewContainer = previewContainerRef.current;
 
-    const lastColContentHeight =
-      scrollVals.contentHeight % scrollVals.containerHeight;
-    const percentWhitespaceNeeded =
-      ((scrollVals.containerHeight - lastColContentHeight) /
-        scrollVals.containerHeight) *
-      100;
-
-    return percentWhitespaceNeeded;
+    if (isLastCol && !!scrollContainer && !!previewContainer) {
+      const percentWhitespaceNeeded =
+        (1 -
+          (previewContainer.offsetHeight - scrollToCoord) /
+            scrollContainer.offsetHeight) *
+        100;
+      return <div style={{ height: `${percentWhitespaceNeeded}%` }} />;
+    }
+    return null;
   };
 
   return (
@@ -76,7 +74,7 @@ export const TextPreviewColumn = ({
             setPreviewRendered={setPreviewRendered}
           />
         </div>
-        <div style={{ height: `${calcWhitespace()}%` }} />
+        <Whitespace />
       </div>
     </div>
   );

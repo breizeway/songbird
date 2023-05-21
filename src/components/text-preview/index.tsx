@@ -12,39 +12,45 @@ interface ITextPreviewProps {
 }
 
 export const TextPreview = ({ source }: ITextPreviewProps): JSX.Element => {
-  const INIT_NUM_PANES = 1;
-  const MIN_NUM_PANES = 1;
-
-  const [numColumns, _setNumColumns] = useState(INIT_NUM_PANES);
-  const setNumColumns = (newNumColumns: number) => {
-    _setNumColumns(
-      newNumColumns < MIN_NUM_PANES ? MIN_NUM_PANES : newNumColumns
-    );
-  };
-
   const [scrollVals, setScrollVals] = useState<ScrollVals>({
     containerHeight: 0,
     contentHeight: 0,
   });
+  const SCROLL_OVERLAP = 64;
+  const INIT_SCROLL_COORD = 0;
+
+  const [scrollToCords, setScrollToCoords] = useState([0]);
+
   useEffect(() => {
-    if (Object.values(scrollVals).some((val) => val > 0)) {
-      const newNumColumns = Math.ceil(
-        scrollVals.contentHeight / scrollVals.containerHeight
-      );
-      setNumColumns(newNumColumns);
+    if (Object.values(scrollVals).every((val) => val > 0)) {
+      const newScrollToCoords: number[] = [INIT_SCROLL_COORD];
+      while (
+        (newScrollToCoords.at(-1) ?? INIT_SCROLL_COORD) <
+        scrollVals.contentHeight
+      ) {
+        const scrollToCoord =
+          (newScrollToCoords.at(-1) ?? INIT_SCROLL_COORD) +
+          scrollVals.containerHeight -
+          SCROLL_OVERLAP;
+        newScrollToCoords.push(scrollToCoord);
+      }
+
+      newScrollToCoords.pop();
+      setScrollToCoords(newScrollToCoords);
     }
   }, [scrollVals]);
 
   return (
     <div className={styles.comp}>
-      {[...Array(numColumns)].map((_, idx) => (
+      {scrollToCords.map((coord, idx) => (
         <TextPreviewColumn
           key={idx}
           source={source}
-          columnIndex={idx}
-          numColumns={numColumns}
-          scrollVals={scrollVals}
+          isFirstCol={idx === 0}
+          isLastCol={idx === scrollToCords.length - 1}
           setScrollVals={setScrollVals}
+          scrollToCoord={coord}
+          lastScrollToCoord={scrollToCords.at(-1) ?? 0} // important for rerendering appropriately
         />
       ))}
     </div>
