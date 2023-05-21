@@ -3,25 +3,60 @@
 }
 
 .comp h1 {
-  @apply flex text-5xl;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  font-weight: bold;
 }
 
 .comp h2 {
-  @apply flex text-4xl;
+  font-size: 1.5em;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+  font-weight: bold;
 }
 
 .comp h3 {
-  @apply flex text-3xl;
+  font-size: 1.17em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-weight: bold;
 }
 
 .comp h4 {
-  @apply flex text-2xl;
+  font-size: 1em;
+  margin-top: 1.33em;
+  margin-bottom: 1.33em;
+  font-weight: bold;
 }
 
 .comp h5 {
-  @apply flex text-xl;
+  font-size: 0.83em;
+  margin-top: 1.67em;
+  margin-bottom: 1.67em;
+  font-weight: bold;
 }
 
 .comp h6 {
-  @apply flex text-lg;
+  font-size: 0.67em;
+  margin-top: 2.33em;
+  margin-bottom: 2.33em;
+  font-weight: bold;
 }
+
+.comp p {
+  /* non-standard top and bottom */
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+  text-indent: -0.5em;
+  margin-left: 0.5em;
+}
+
+/* .comp h1,
+.comp h2,
+.comp h3,
+.comp h4,
+.comp h5,
+.comp h6 {
+  @apply pb-4;
+} */

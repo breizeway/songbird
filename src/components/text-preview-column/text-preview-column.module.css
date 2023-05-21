@@ -7,31 +7,3 @@
 .scrollContainer {
   @apply overflow-scroll h-full;
 }
-
-.preview {
-  @apply font-mono;
-}
-
-.preview h1 {
-  @apply flex text-5xl;
-}
-
-.preview h2 {
-  @apply flex text-4xl;
-}
-
-.preview h3 {
-  @apply flex text-3xl;
-}
-
-.preview h4 {
-  @apply flex text-2xl;
-}
-
-.preview h5 {
-  @apply flex text-xl;
-}
-
-.preview h6 {
-  @apply flex text-lg;
-}

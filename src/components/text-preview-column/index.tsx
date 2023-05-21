@@ -57,9 +57,10 @@ export const TextPreviewColumn = ({
     )
       return 0;
 
-    const lastColHeight = scrollVals.contentHeight % scrollVals.containerHeight;
+    const lastColContentHeight =
+      scrollVals.contentHeight % scrollVals.containerHeight;
     const percentWhitespaceNeeded =
-      ((scrollVals.containerHeight - lastColHeight) /
+      ((scrollVals.containerHeight - lastColContentHeight) /
         scrollVals.containerHeight) *
       100;
 
@@ -69,7 +70,7 @@ export const TextPreviewColumn = ({
   return (
     <div className={styles.comp}>
       <div className={styles.scrollContainer} ref={scrollContainerRef}>
-        <div className={styles.preview} ref={previewContainerRef}>
+        <div ref={previewContainerRef}>
           <TextPreviewMd
             source={source}
             setPreviewRendered={setPreviewRendered}
