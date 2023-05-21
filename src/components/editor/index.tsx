@@ -8,6 +8,9 @@ interface IEditorProps {}
 
 export const Editor = ({}: IEditorProps): JSX.Element => {
   const [text, setText] = useState(testMd);
+  const [resync, _setResync] = useState({});
+  const triggerResync = () => _setResync({});
+  // TODO: fix - may not rejigger number of columns if it's on the edge of two amounts
 
   enum TextMode {
     "edit",
@@ -33,12 +36,13 @@ export const Editor = ({}: IEditorProps): JSX.Element => {
   return (
     <div className={styles.comp}>
       <div className={styles.controls}>
-        <button onClick={toggleTextMode}>{"Edit/Preview"}</button>
+        <button onClick={toggleTextMode}>Edit/Preview</button>
+        <button onClick={triggerResync}>Sync</button>
       </div>
       {textMode === TextMode.edit ? (
         <TextEdit text={text} setText={setText} />
       ) : (
-        <TextPreview source={text} />
+        <TextPreview source={text} resync={resync} />
       )}
     </div>
   );

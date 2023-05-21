@@ -9,9 +9,13 @@ export interface ScrollVals {
 
 interface ITextPreviewProps {
   source: string;
+  resync: {};
 }
 
-export const TextPreview = ({ source }: ITextPreviewProps): JSX.Element => {
+export const TextPreview = ({
+  source,
+  resync,
+}: ITextPreviewProps): JSX.Element => {
   const [scrollVals, setScrollVals] = useState<ScrollVals>({
     containerHeight: 0,
     contentHeight: 0,
@@ -38,7 +42,7 @@ export const TextPreview = ({ source }: ITextPreviewProps): JSX.Element => {
       newScrollToCoords.pop(); // last one will be more than contentHeight by nature of while loop
       setScrollToCoords(newScrollToCoords);
     }
-  }, [scrollVals]);
+  }, [scrollVals, resync]);
 
   return (
     <div className={styles.comp}>
@@ -50,6 +54,7 @@ export const TextPreview = ({ source }: ITextPreviewProps): JSX.Element => {
           isLastCol={idx === scrollToCords.length - 1}
           setScrollVals={setScrollVals}
           scrollToCoord={coord}
+          resync={resync}
           lastScrollToCoord={scrollToCords.at(-1) ?? 0} // important for rerendering appropriately
         />
       ))}
