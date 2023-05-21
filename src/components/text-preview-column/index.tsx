@@ -1,11 +1,7 @@
-import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { ScrollVals } from "../text-preview";
+import { TextPreviewMd } from "../text-preview-md";
 import styles from "./text-preview-column.module.css";
-
-const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
-  ssr: false,
-});
 
 interface ITextPreviewColumnProps {
   source: string;
@@ -24,21 +20,21 @@ export const TextPreviewColumn = ({
 }: ITextPreviewColumnProps): JSX.Element => {
   const [previewRendered, setPreviewRendered] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const previewRef = useRef<HTMLDivElement>(null);
+  const previewContainerRef = useRef<HTMLDivElement>(null);
 
   // calculate scroll height values and sent back to parent comp
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
-    const preview = previewRef.current;
+    const previewContainer = previewContainerRef.current;
     if (
       columnIndex === 0 &&
       previewRendered &&
       !!scrollContainer &&
-      !!preview
+      !!previewContainer
     ) {
       setScrollVals({
         containerHeight: scrollContainer.offsetHeight,
-        contentHeight: preview.offsetHeight,
+        contentHeight: previewContainer.offsetHeight,
       });
     }
   }, [columnIndex, previewRendered, setScrollVals, numColumns]);
@@ -73,15 +69,10 @@ export const TextPreviewColumn = ({
   return (
     <div className={styles.comp}>
       <div className={styles.scrollContainer} ref={scrollContainerRef}>
-        <div ref={previewRef}>
-          <MarkdownPreview
+        <div className={styles.preview} ref={previewContainerRef}>
+          <TextPreviewMd
             source={source}
-            className={styles.preview}
-            rehypeRewrite={(node) => {
-              if (node.type === "root") {
-                setTimeout(() => setPreviewRendered(true));
-              }
-            }}
+            setPreviewRendered={setPreviewRendered}
           />
         </div>
         <div style={{ height: `${calcWhitespace()}%` }} />

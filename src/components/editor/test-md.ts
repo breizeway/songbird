@@ -1,71 +1,91 @@
-export const testMd = `# test
+export const testMd = `[Verse 1]
 
-## test2
+You might lose your faith in science
 
-## test2
+You might lose faith in wealth
 
-more test
-'
+You might lose your faith in Jesus
 
-another paragrag
+Or, or lose faith in yourself
 
-more
+<br />
 
-and more
+[Chorus]
 
-and more 
-am
+But when I let you down
 
+Look past your doubt
 
-dsds
-s
-ƒ
----
+Just, please, please, please
 
-# test
+Don't lose your faith in me
 
-## test2
+<br />
 
-## test2
+[Verse 2]
 
-more test
-'
+You could lose your faith in music
 
-another paragrag
+Or lose your faith in friends
 
-more
+You could lose your faith in freedom
 
-and more
+Feel trapped in your own skin
 
-and more 
-am
+Oh, but I'll be right there beside you
 
+(I'll be right there beside you)
 
-dsds
-s
-ƒ
----
+Oh, when the walls are caving in
 
-# test
+(I swear, oh, I'm not going anywhere)
 
-## test2
+<br />
 
-## test2
+[Chorus]
 
-more test
-'
+But when I let you down
 
-another paragrag
+Look past your doubt
 
-more
+Just please, please, please
 
-and more
+Don't lose your faith in me
 
-and more 
-am
+Please don't lose your faith in me
 
+<br />
 
-dsds
-s
-ƒ
----`;
+[Bridge]
+
+Oh, oh, oh
+
+Oh, oh, oh
+
+I'm not going anywhere
+
+Oh, oh, oh
+
+I'm not going anywhere
+
+Oh, oh, oh
+
+Oh, oh, oh
+
+I'm not going anywhere
+
+<br />
+
+[Chorus]
+
+But when I let you down
+
+Look past your doubt
+
+Just please, please, please
+
+Don't lose your faith in me
+
+Please don't lose your faith in me
+
+I'm not going anywhere`;

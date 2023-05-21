@@ -1,0 +1,27 @@
+.comp {
+  @apply font-mono;
+}
+
+.comp h1 {
+  @apply flex text-5xl;
+}
+
+.comp h2 {
+  @apply flex text-4xl;
+}
+
+.comp h3 {
+  @apply flex text-3xl;
+}
+
+.comp h4 {
+  @apply flex text-2xl;
+}
+
+.comp h5 {
+  @apply flex text-xl;
+}
+
+.comp h6 {
+  @apply flex text-lg;
+}
