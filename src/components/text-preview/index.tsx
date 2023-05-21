@@ -35,7 +35,7 @@ export const TextPreview = ({ source }: ITextPreviewProps): JSX.Element => {
         newScrollToCoords.push(scrollToCoord);
       }
 
-      newScrollToCoords.pop();
+      newScrollToCoords.pop(); // last one will be more than contentHeight by nature of while loop
       setScrollToCoords(newScrollToCoords);
     }
   }, [scrollVals]);
