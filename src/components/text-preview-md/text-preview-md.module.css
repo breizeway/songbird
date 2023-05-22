@@ -50,11 +50,20 @@
   margin-bottom: 0.2em;
   text-indent: -0.5em;
   padding-left: 0.5em;
-  /* white-space: pre-line; */
-
-  /* @apply leading-7; */
 }
 
 .comp code {
   @apply bg-slate-500 text-red-600 bg-opacity-50 p-1 text-sm rounded-sm;
+}
+
+.comp .tab {
+  @apply relative inline-flex whitespace-nowrap min-w-fit;
+}
+
+.comp .tab span {
+  @apply absolute bottom-3 left-[0.55rem] text-amber-600 font-bold opacity-80;
+}
+
+.comp .tabParent {
+  @apply mt-4;
 }

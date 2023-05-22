@@ -15,7 +15,9 @@ export const Editor = ({}: IEditorProps): JSX.Element => {
     "edit",
     "preview",
   }
-  const [textMode, _setTextMode] = useState<TextMode>(TextMode.edit);
+  const [textMode, _setTextMode] = useState<TextMode>(
+    text ? TextMode.preview : TextMode.edit
+  );
   const toggleTextMode = useCallback(() => {
     _setTextMode(textMode === TextMode.edit ? TextMode.preview : TextMode.edit);
   }, [TextMode, textMode]);

@@ -1,14 +1,27 @@
-import { Element, ElementContent, Root, RootContent } from "hast";
+import classNames from "classnames";
+import {
+  Element,
+  ElementContent,
+  Properties,
+  Root,
+  RootContent,
+  Text,
+} from "hast";
+import styles from "./text-preview-md.module.css";
 
 const isBreak = (childNode: ElementContent) =>
   childNode.type === "element" && childNode.tagName === "br";
 const isNewLine = (childNode: ElementContent) =>
   childNode.type === "text" && childNode.value === "\n";
-const newPWithChildren = (children: ElementContent[]): ElementContent => {
+const newElementNode = (
+  tagName: string,
+  children: ElementContent[] | undefined = [],
+  properties: Properties | undefined = {}
+): ElementContent => {
   return {
     type: "element",
-    tagName: "p",
-    properties: {},
+    tagName,
+    properties,
     children,
     position: {
       start: {
@@ -24,6 +37,31 @@ const newPWithChildren = (children: ElementContent[]): ElementContent => {
     },
   };
 };
+const newTextNode = (value: string | undefined = ""): Text => ({
+  type: "text",
+  value,
+});
+
+// const newPWithChildren = (children: ElementContent[]): ElementContent => {
+//   return {
+//     type: "element",
+//     tagName: "p",
+//     properties: {},
+//     children,
+//     position: {
+//       start: {
+//         line: 0,
+//         column: 0,
+//         offset: 0,
+//       },
+//       end: {
+//         line: 0,
+//         column: 0,
+//         offset: 0,
+//       },
+//     },
+//   };
+// };
 
 export const removeHeadingLinks = (
   node: Root | RootContent,
@@ -41,7 +79,7 @@ export const removeHeadingLinks = (
   }
 };
 
-export const splitPs = (
+export const splitPs /* lol */ = (
   node: Root | RootContent,
   _: number | null,
   __: Root | Element | null
@@ -72,11 +110,45 @@ export const splitPs = (
           newPChildIdx++;
         }
 
-        newChildren.push(newPWithChildren(newPChildren));
+        newChildren.push(newElementNode("p", newPChildren));
       } else if (!childIndicesToExtract.includes(idx)) {
         newChildren.push(child);
       }
     });
     node.children = newChildren;
+  }
+};
+
+export const extractTabs = (
+  node: Root | RootContent,
+  index: number | null,
+  parent: Root | Element | null
+) => {
+  const tabExpression = /(\|.+\|)/;
+
+  if (
+    parent &&
+    parent.type === "element" &&
+    ["p", "em", "strong"].includes(parent.tagName) &&
+    node.type === "text" &&
+    tabExpression.test(node.value)
+  ) {
+    const splitValue = node.value.split(tabExpression);
+
+    const test = splitValue.map((str) => {
+      if (tabExpression.test(str)) {
+        return newElementNode(
+          "span",
+          [newElementNode("span", [newTextNode(str.replaceAll("|", ""))])],
+          { class: styles.tab }
+        );
+      } else return newTextNode(str);
+    });
+    parent.children.splice(index ?? 0, 1, ...test);
+
+    parent.properties = {
+      ...parent.properties,
+      className: classNames(parent.properties?.className, styles.tabParent),
+    };
   }
 };

@@ -1,13 +1,13 @@
 export const testMd = `# Faith - Taking Back Sunday
 ## [Verse 1]
 You ${"`"}might${"`"} lose your faith in science
-You *might* lose faith in wealth
+You |Am7|*might* lose faith in wealth
 **You** might **lose** your faith in Jesus
 Or, or ~~lose~~ faith in yourself
 
 ## [Chorus]
 But when I let you down
-Look past your doubt
+Look past |B♭|your doubt
 Just, please, please, please
 Don't lose your faith in me
 
