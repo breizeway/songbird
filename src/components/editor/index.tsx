@@ -8,13 +8,15 @@ interface IEditorProps {}
 
 export const Editor = ({}: IEditorProps): JSX.Element => {
   const [text, setText] = useState(testMd);
+  const [resync, _setResync] = useState({});
+  const triggerResync = () => _setResync({});
 
   enum TextMode {
     "edit",
     "preview",
   }
   const [textMode, _setTextMode] = useState<TextMode>(TextMode.edit);
-  const switchTextMode = useCallback(() => {
+  const toggleTextMode = useCallback(() => {
     _setTextMode(textMode === TextMode.edit ? TextMode.preview : TextMode.edit);
   }, [TextMode, textMode]);
 
@@ -22,23 +24,24 @@ export const Editor = ({}: IEditorProps): JSX.Element => {
     const listenForShortcuts = (e: KeyboardEvent) => {
       if (e.metaKey && e.key === "e") {
         e.preventDefault();
-        switchTextMode();
+        toggleTextMode();
       }
     };
 
     document.body.addEventListener("keydown", listenForShortcuts);
     return () =>
       document.body.removeEventListener("keydown", listenForShortcuts);
-  }, [switchTextMode]);
+  }, [toggleTextMode]);
   return (
     <div className={styles.comp}>
       <div className={styles.controls}>
-        <button onClick={switchTextMode}>{"Edit/Preview"}</button>
+        <button onClick={toggleTextMode}>Edit/Preview</button>
+        <button onClick={triggerResync}>Sync</button>
       </div>
       {textMode === TextMode.edit ? (
         <TextEdit text={text} setText={setText} />
       ) : (
-        <TextPreview source={text} />
+        <TextPreview source={text} resync={resync} />
       )}
     </div>
   );

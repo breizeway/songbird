@@ -7,7 +7,3 @@
 .scrollContainer {
   @apply overflow-scroll h-full;
 }
-
-.preview {
-  @apply font-mono;
-}
