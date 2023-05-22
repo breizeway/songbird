@@ -36,7 +36,9 @@ export const Editor = ({}: IEditorProps): JSX.Element => {
     <div className={styles.comp}>
       <div className={styles.controls}>
         <button onClick={toggleTextMode}>Edit/Preview</button>
-        <button onClick={triggerResync}>Sync</button>
+        {textMode === TextMode.preview && (
+          <button onClick={triggerResync}>Sync</button>
+        )}
       </div>
       {textMode === TextMode.edit ? (
         <TextEdit text={text} setText={setText} />
