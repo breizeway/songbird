@@ -24,7 +24,8 @@ export const TextPreviewMd = ({
       className={styles.comp}
       source={source}
       rehypeRewrite={(node, index, parent) => {
-        // console.log(`:::NODE::: `, node);
+        // console.log(`:::PARENT::: `, parent);
+        console.log(`:::NODE::: `, node);
         if (node.type === "root") {
           setTimeout(() => setPreviewRendered(true));
         }
@@ -32,13 +33,42 @@ export const TextPreviewMd = ({
         // remove heading links
         if (
           nodeIsElement(node) &&
+          parent &&
           nodeIsElement(parent) &&
           node.tagName === "a" &&
-          parent &&
           /^h(1|2|3|4|5|6)/.test(parent.tagName)
         ) {
           parent.children = parent.children.slice(1);
         }
+
+        // if (node.value !== undefined) {
+        //   node.value = node.value?.replaceAll("\n", "\n\n");
+        // }
+        // console.log(`:::NODE.VALUE::: `, node.value);
+
+        // split adjacent lines into multiple Ps
+        // if (
+        //   nodeIsElement(node) &&
+        //   node.tagName === "p" &&
+        //   parent?.type === "root"
+        // ) {
+        //   const splitPs /* lol */ = node.children.map((child) => {
+        //     if (!child.value?.includes("\n")) return child;
+        //     else
+        //       return {
+        //         ...node,
+        //         children: child.value.split("\n").map((text: string, idx) => {
+        //           if (idx === 0) return { ...child, value: text };
+        //           return {
+        //             ...node,
+        //             children: [{ ...child, value: text }],
+        //           };
+        //         }),
+        //       };
+        //   });
+
+        //   node.children = splitPs;
+        // }
       }}
     />
   );
