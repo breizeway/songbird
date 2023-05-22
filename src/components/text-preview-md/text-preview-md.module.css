@@ -48,9 +48,9 @@
   /* non-standard top and bottom */
   margin-top: 0.2em;
   margin-bottom: 0.2em;
-  /* text-indent: -0.5em;
-  padding-left: 0.5em; */
-  white-space: pre-line;
+  text-indent: -0.5em;
+  padding-left: 0.5em;
+  /* white-space: pre-line; */
 
   /* @apply leading-7; */
 }
