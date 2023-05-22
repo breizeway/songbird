@@ -19,10 +19,6 @@ export const TextPreviewMd = ({
   source,
   setPreviewRendered,
 }: ITextPreviewMdProps): JSX.Element => {
-  // const transformSource = (source: string) => {
-  //   const lines = source.split("\n");
-  // }
-
   return (
     <MarkdownPreview
       className={styles.comp}

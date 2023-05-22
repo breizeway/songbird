@@ -9,7 +9,6 @@ interface ITextPreviewColumnProps {
   isLastCol: boolean;
   setScrollVals: (scrollVals: ScrollVals) => void;
   scrollToCoord: number;
-  resync: {};
   lastScrollToCoord: number;
 }
 
@@ -19,7 +18,6 @@ export const TextPreviewColumn = ({
   isLastCol,
   setScrollVals,
   scrollToCoord,
-  resync,
   lastScrollToCoord,
 }: ITextPreviewColumnProps): JSX.Element => {
   const [previewRendered, setPreviewRendered] = useState(false);
@@ -41,7 +39,7 @@ export const TextPreviewColumn = ({
         contentHeight: previewContainer.offsetHeight,
       });
     }
-  }, [isFirstCol, previewRendered, setScrollVals, lastScrollToCoord, resync]);
+  }, [isFirstCol, previewRendered, setScrollVals, lastScrollToCoord]);
 
   // scroll to the correct place after additional columns are added
   useEffect(() => {
@@ -49,7 +47,7 @@ export const TextPreviewColumn = ({
     if (previewRendered && !!scrollContainer) {
       scrollContainer.scrollTo({ top: scrollToCoord });
     }
-  }, [isFirstCol, previewRendered, scrollToCoord, lastScrollToCoord, resync]);
+  }, [isFirstCol, previewRendered, scrollToCoord, lastScrollToCoord]);
 
   // whitespace to add to the last column so it cans scroll down far enough
   const Whitespace = () => {

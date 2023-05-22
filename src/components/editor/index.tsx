@@ -10,7 +10,6 @@ export const Editor = ({}: IEditorProps): JSX.Element => {
   const [text, setText] = useState(testMd);
   const [resync, _setResync] = useState({});
   const triggerResync = () => _setResync({});
-  // TODO: fix - may not rejigger number of columns if it's on the edge of two amounts
 
   enum TextMode {
     "edit",
