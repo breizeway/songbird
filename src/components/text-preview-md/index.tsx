@@ -7,10 +7,6 @@ const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
 });
 
-// function nodeIsElement(node: Root | RootContent | null): node is Element {
-//   return (node as Element).tagName !== undefined;
-// }
-
 interface ITextPreviewMdProps {
   source: string;
   setPreviewRendered: (previewRendered: boolean) => void;

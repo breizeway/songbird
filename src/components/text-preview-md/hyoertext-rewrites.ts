@@ -1,17 +1,15 @@
-import { Element, ElementContent, Root, RootContent, Text } from "hast";
+import { Element, ElementContent, Root, RootContent } from "hast";
 
 const isBreak = (childNode: ElementContent) =>
   childNode.type === "element" && childNode.tagName === "br";
 const isNewLine = (childNode: ElementContent) =>
   childNode.type === "text" && childNode.value === "\n";
-const isSingleLineText = (childNode: ElementContent) =>
-  childNode.type === "text" && !childNode.value.includes("\n");
-const newPFromText = (text: Text): ElementContent => {
+const newPWithChildren = (children: ElementContent[]): ElementContent => {
   return {
     type: "element",
     tagName: "p",
     properties: {},
-    children: [text],
+    children,
     position: {
       start: {
         line: 0,
@@ -49,27 +47,36 @@ export const splitPs = (
   __: Root | Element | null
 ) => {
   if (node.type === "element" && node.tagName === "p") {
-    // console.log(`:::NODE::: `, node);
+    const oldChildren = [...node.children];
     const newChildren: ElementContent[] = [];
-    const groupIndexes: number[] = [];
-    node.children.forEach((child, idx) => {
+    const childIndicesToExtract: number[] = [];
+
+    oldChildren.forEach((child, idx) => {
       if (
-        idx <= node.children.length - 3 &&
+        idx <= oldChildren.length - 3 &&
         isBreak(child) &&
-        isNewLine(node.children[idx + 1]) &&
-        isSingleLineText(node.children[idx + 2])
-        // && (!node.children[idx + 3] || isBreak(node.children[idx + 3]))
+        isNewLine(oldChildren[idx + 1]) &&
+        !isBreak(oldChildren[idx + 2]) &&
+        !isNewLine(oldChildren[idx + 2])
       ) {
-        groupIndexes.push(idx, idx + 1, idx + 2);
-        newChildren.push(newPFromText(node.children[idx + 2] as Text));
-        // console.log(`:::group-IDX::: `, idx);
-      } else if (!groupIndexes.includes(idx)) {
-        // console.log(`:::single-IDX::: `, idx);
-        newChildren.push({ ...child });
+        childIndicesToExtract.push(idx, idx + 1);
+
+        const newPChildren: ElementContent[] = [];
+        let newPChildIdx = idx + 2;
+        while (
+          !!oldChildren[newPChildIdx] &&
+          !isBreak(oldChildren[newPChildIdx])
+        ) {
+          childIndicesToExtract.push(newPChildIdx);
+          newPChildren.push(oldChildren[newPChildIdx]);
+          newPChildIdx++;
+        }
+
+        newChildren.push(newPWithChildren(newPChildren));
+      } else if (!childIndicesToExtract.includes(idx)) {
+        newChildren.push(child);
       }
     });
-    console.log(`:::OLDCHILDREN::: `, node.children);
-    console.log(`:::NEWCHILDREN::: `, newChildren);
     node.children = newChildren;
   }
 };
