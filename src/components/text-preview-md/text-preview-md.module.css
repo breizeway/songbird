@@ -4,59 +4,57 @@
 
 .comp h1 {
   font-size: 2em;
-  padding-top: 0.67em;
-  padding-bottom: 0.67em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
   font-weight: bold;
 }
 
 .comp h2 {
   font-size: 1.5em;
-  padding-top: 0.83em;
-  padding-bottom: 0.83em;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
   font-weight: bold;
 }
 
 .comp h3 {
   font-size: 1.17em;
-  padding-top: 1em;
-  padding-bottom: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
   font-weight: bold;
 }
 
 .comp h4 {
   font-size: 1em;
-  padding-top: 1.33em;
-  padding-bottom: 1.33em;
+  margin-top: 1.33em;
+  margin-bottom: 1.33em;
   font-weight: bold;
 }
 
 .comp h5 {
   font-size: 0.83em;
-  padding-top: 1.67em;
-  padding-bottom: 1.67em;
+  margin-top: 1.67em;
+  margin-bottom: 1.67em;
   font-weight: bold;
 }
 
 .comp h6 {
   font-size: 0.67em;
-  padding-top: 2.33em;
-  padding-bottom: 2.33em;
+  margin-top: 2.33em;
+  margin-bottom: 2.33em;
   font-weight: bold;
 }
 
 .comp p {
   /* non-standard top and bottom */
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
   text-indent: -0.5em;
   padding-left: 0.5em;
+  /* white-space: pre-line; */
+
+  /* @apply leading-7; */
 }
 
-/* .comp h1,
-.comp h2,
-.comp h3,
-.comp h4,
-.comp h5,
-.comp h6 {
-  @apply pb-4;
-} */
+.comp code {
+  @apply bg-slate-500 text-red-600 bg-opacity-50 p-1 text-sm rounded-sm;
+}

@@ -1,14 +1,11 @@
-import { Element, Root, RootContent } from "hast";
 import dynamic from "next/dynamic";
+import remarkBreaks from "remark-breaks";
+import { removeHeadingLinks, splitPs } from "./hyoertext-rewrites";
 import styles from "./text-preview-md.module.css";
 
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
 });
-
-function nodeIsElement(node: Root | RootContent | null): node is Element {
-  return (node as Element).tagName !== undefined;
-}
 
 interface ITextPreviewMdProps {
   source: string;
@@ -23,22 +20,14 @@ export const TextPreviewMd = ({
     <MarkdownPreview
       className={styles.comp}
       source={source}
+      remarkPlugins={[remarkBreaks]}
       rehypeRewrite={(node, index, parent) => {
-        // console.log(`:::NODE::: `, node);
         if (node.type === "root") {
           setTimeout(() => setPreviewRendered(true));
         }
 
-        // remove heading links
-        if (
-          nodeIsElement(node) &&
-          nodeIsElement(parent) &&
-          node.tagName === "a" &&
-          parent &&
-          /^h(1|2|3|4|5|6)/.test(parent.tagName)
-        ) {
-          parent.children = parent.children.slice(1);
-        }
+        removeHeadingLinks(node, index, parent);
+        splitPs(node, index, parent);
       }}
     />
   );
