@@ -100,32 +100,139 @@ export const splitPs /* lol */ = (
   }
 };
 
+export const extractChords = (
+  node: Root | RootContent,
+  index: number | null,
+  parent: Root | Element | null
+) => {
+  const test = "|A|You not these words |B|might |C| lo|D|se|d|";
+  // 1 or more characters given that the characters are (1) between 2 "|", and (2) are not "|"
+  const chordExpression = /(\|{1}[^\|]+\|{1})/;
+  const chordOrSpaceExpression = /(\|{1}[^\|]+\|{1}|\s)/;
+  const wordWithChordExp =
+    /(?<=(?:^|\s))([^\s\|]*\|{1}\S+\|{1}[^\s\|]*)+(?=(?:\s|$))/;
+
+  const site =
+    "https://stackoverflow.com/questions/57856398/javascript-split-with-regular-expression-return-empty-values";
+  if (
+    parent &&
+    parent.type === "element" &&
+    ["p", "em", "strong"].includes(parent.tagName) &&
+    node.type === "text" &&
+    chordExpression.test(node.value)
+  ) {
+    const newWords = node.value
+      .split(chordOrSpaceExpression)
+      .filter((str) => !!str)
+      .reduce(
+        (acc, str, idx, arr) => {
+          if (str !== " " && (arr[idx - 1] ?? "") !== " ") {
+            return [
+              ...acc.slice(0, acc.length - 1),
+              acc[acc.length - 1].concat(str),
+            ];
+          } else return [...acc, str];
+        },
+        [""]
+      )
+      .reduce(
+        (acc, str, idx, arr) => {
+          if (
+            !chordExpression.test(arr[idx]) &&
+            !chordExpression.test(arr[idx - 1] ?? "")
+          ) {
+            return [
+              ...acc.slice(0, acc.length - 1),
+              acc[acc.length - 1].concat(str),
+            ];
+          } else return [...acc, str];
+        },
+        [""]
+      );
+    console.log(`:::NEWWORDS::: `, newWords);
+
+    // const replacementNodes: ElementContent[] = [];
+    // const skipIndices: number[] = [];
+    // splitValue.forEach((str, idx) => {
+    //   if (chordExpression.test(str)) {
+    //     skipIndices.push(idx + 1);
+    //     replacementNodes.push(
+    //       newElementNode(
+    //         "span",
+    //         [
+    //           newElementNode(
+    //             "span",
+    //             [
+    //               newElementNode("strong", [
+    //                 newTextNode(str.replaceAll("|", "")),
+    //               ]),
+    //             ],
+    //             { className: styles.chord }
+    //           ),
+    //           newTextNode(splitValue[idx + 1].split(" ")[0]),
+    //         ],
+    //         { className: styles.chordWrapper }
+    //       )
+    //     );
+    //   } else if (skipIndices.includes(idx))
+    //     replacementNodes.push(newTextNode(str.split(" ").slice(1).join(" ")));
+    //   else replacementNodes.push(newTextNode(str));
+    // });
+
+    // parent.children.splice(index ?? 0, 1, ...replacementNodes);
+  }
+};
+
 export const extractTabs = (
   node: Root | RootContent,
   index: number | null,
   parent: Root | Element | null
 ) => {
   // 1 or more characters given that the characters are (1) between 2 "|", and (2) are not "|"
-  const tabExpression = /(\|[^\|]+\|)/;
+  const chordExpression = /(\|[^\|]+\|)/;
 
   if (
     parent &&
     parent.type === "element" &&
     ["p", "em", "strong"].includes(parent.tagName) &&
     node.type === "text" &&
-    tabExpression.test(node.value)
+    chordExpression.test(node.value)
   ) {
-    const splitValue = node.value.split(tabExpression);
+    const splitValue = node.value.split(chordExpression);
 
-    const splitNode = splitValue.map((str) => {
-      if (tabExpression.test(str)) {
-        return newElementNode(
-          "span",
-          [newElementNode("strong", [newTextNode(str.replaceAll("|", ""))])],
-          { class: styles.tab }
+    const replacementNodes: ElementContent[] = [];
+    const skipIndices: number[] = [];
+    splitValue.forEach((str, idx) => {
+      if (chordExpression.test(str)) {
+        skipIndices.push(idx + 1);
+        replacementNodes.push(
+          newElementNode(
+            "span",
+            [
+              newElementNode(
+                "span",
+                [
+                  newElementNode("strong", [
+                    newTextNode(str.replaceAll("|", "")),
+                  ]),
+                ],
+                { className: styles.chord }
+              ),
+              newTextNode(splitValue[idx + 1].split(" ")[0]),
+            ],
+            { className: styles.chordWrapper }
+          )
         );
-      } else return newTextNode(str);
+      } else if (skipIndices.includes(idx))
+        replacementNodes.push(newTextNode(str.split(" ").slice(1).join(" ")));
+      else replacementNodes.push(newTextNode(str));
     });
-    parent.children.splice(index ?? 0, 1, ...splitNode);
+
+    // const chordWrapper = newElementNode(
+    //         "span",
+    //         [newElementNode("strong", [newTextNode(str.replaceAll("|", ""))])],
+    //         { class: styles.chord }
+    //       )
+    parent.children.splice(index ?? 0, 1, ...replacementNodes);
   }
 };

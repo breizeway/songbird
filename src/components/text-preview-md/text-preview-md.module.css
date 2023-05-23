@@ -56,10 +56,14 @@
   @apply bg-slate-500 text-red-600 bg-opacity-50 p-1 text-sm rounded-sm;
 }
 
-.comp .tab {
+.comp .chord {
   @apply relative inline-block mt-8;
 }
 
-.comp .tab strong {
+.comp .chord strong {
   @apply absolute bottom-3 left-2 text-amber-300;
+}
+
+.comp .chordWrapper {
+  @apply whitespace-nowrap;
 }

@@ -1,6 +1,10 @@
 import dynamic from "next/dynamic";
 import remarkBreaks from "remark-breaks";
-import { extractTabs, removeHeadingLinks, splitPs } from "./hypertext-rewrites";
+import {
+  extractChords,
+  removeHeadingLinks,
+  splitPs,
+} from "./hypertext-rewrites";
 import styles from "./text-preview-md.module.css";
 
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
@@ -27,7 +31,7 @@ export const TextPreviewMd = ({
         }
 
         removeHeadingLinks(node, index, parent);
-        extractTabs(node, index, parent);
+        extractChords(node, index, parent);
         splitPs(node, index, parent);
       }}
     />
