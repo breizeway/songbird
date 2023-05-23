@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import {
   Element,
   ElementContent,
@@ -11,8 +10,10 @@ import styles from "./text-preview-md.module.css";
 
 const isBreak = (childNode: ElementContent) =>
   childNode.type === "element" && childNode.tagName === "br";
+
 const isNewLine = (childNode: ElementContent) =>
   childNode.type === "text" && childNode.value === "\n";
+
 const newElementNode = (
   tagName: string,
   children: ElementContent[] | undefined = [],
@@ -37,31 +38,11 @@ const newElementNode = (
     },
   };
 };
+
 const newTextNode = (value: string | undefined = ""): Text => ({
   type: "text",
   value,
 });
-
-// const newPWithChildren = (children: ElementContent[]): ElementContent => {
-//   return {
-//     type: "element",
-//     tagName: "p",
-//     properties: {},
-//     children,
-//     position: {
-//       start: {
-//         line: 0,
-//         column: 0,
-//         offset: 0,
-//       },
-//       end: {
-//         line: 0,
-//         column: 0,
-//         offset: 0,
-//       },
-//     },
-//   };
-// };
 
 export const removeHeadingLinks = (
   node: Root | RootContent,
@@ -124,7 +105,8 @@ export const extractTabs = (
   index: number | null,
   parent: Root | Element | null
 ) => {
-  const tabExpression = /(\|.+\|)/;
+  // 1 or more characters given that the characters are (1) between 2 "|", and (2) are not "|"
+  const tabExpression = /(\|[^\|]+\|)/;
 
   if (
     parent &&
@@ -135,20 +117,15 @@ export const extractTabs = (
   ) {
     const splitValue = node.value.split(tabExpression);
 
-    const test = splitValue.map((str) => {
+    const splitNode = splitValue.map((str) => {
       if (tabExpression.test(str)) {
         return newElementNode(
           "span",
-          [newElementNode("span", [newTextNode(str.replaceAll("|", ""))])],
+          [newElementNode("strong", [newTextNode(str.replaceAll("|", ""))])],
           { class: styles.tab }
         );
       } else return newTextNode(str);
     });
-    parent.children.splice(index ?? 0, 1, ...test);
-
-    parent.properties = {
-      ...parent.properties,
-      className: classNames(parent.properties?.className, styles.tabParent),
-    };
+    parent.children.splice(index ?? 0, 1, ...splitNode);
   }
 };

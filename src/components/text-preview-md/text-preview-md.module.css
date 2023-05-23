@@ -57,13 +57,9 @@
 }
 
 .comp .tab {
-  @apply relative inline-flex whitespace-nowrap min-w-fit;
+  @apply relative inline-block mt-8;
 }
 
-.comp .tab span {
-  @apply absolute bottom-3 left-[0.55rem] text-amber-600 font-bold opacity-80;
-}
-
-.comp .tabParent {
-  @apply mt-4;
+.comp .tab strong {
+  @apply absolute bottom-3 left-2 text-amber-300;
 }
