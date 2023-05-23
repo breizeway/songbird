@@ -7,6 +7,4 @@
 
 .column {
   @apply p-4 rounded-md overflow-scroll shadow-md;
-
-  background-color: var(--background-color-fore);
 }

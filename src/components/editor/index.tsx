@@ -15,7 +15,9 @@ export const Editor = ({}: IEditorProps): JSX.Element => {
     "edit",
     "preview",
   }
-  const [textMode, _setTextMode] = useState<TextMode>(TextMode.edit);
+  const [textMode, _setTextMode] = useState<TextMode>(
+    text ? TextMode.preview : TextMode.edit
+  );
   const toggleTextMode = useCallback(() => {
     _setTextMode(textMode === TextMode.edit ? TextMode.preview : TextMode.edit);
   }, [TextMode, textMode]);
@@ -36,7 +38,9 @@ export const Editor = ({}: IEditorProps): JSX.Element => {
     <div className={styles.comp}>
       <div className={styles.controls}>
         <button onClick={toggleTextMode}>Edit/Preview</button>
-        <button onClick={triggerResync}>Sync</button>
+        {textMode === TextMode.preview && (
+          <button onClick={triggerResync}>Sync</button>
+        )}
       </div>
       {textMode === TextMode.edit ? (
         <TextEdit text={text} setText={setText} />
