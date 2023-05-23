@@ -64,6 +64,6 @@
   @apply absolute bottom-3 left-2 text-amber-300;
 }
 
-.comp .chordWrapper {
+.comp .chordGroup {
   @apply whitespace-nowrap;
 }

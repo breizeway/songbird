@@ -100,20 +100,75 @@ export const splitPs /* lol */ = (
   }
 };
 
+/**
+ * Chord Groups
+ */
+
+// |A|You not these words |B|might |C| lo|D|se|d|
+// 1 or more characters given that the characters are (1) between 2 single "|"s, and (2) are not "|"
+const chordExpressionBase = /\|{1}[^\|]+\|{1}/;
+const chordExpression = new RegExp("(" + chordExpressionBase.source + ")");
+// chordExpression OR whitespace
+const chordOrSpaceExpression = new RegExp(
+  "(" + chordExpressionBase.source + /|\s/.source + ")"
+);
+// regex that got close to identifying chords groups, but you disallowed spaces
+// /(?<=(?:^|\s))([^\s\|]*\|{1}\S+\|{1}[^\s\|]*)+(?=(?:\s|$))/;
+const stringNotEmpty = (str: string) => !!str;
+
+const groupChordsByWord = (
+  acc: string[],
+  str: string,
+  idx: number,
+  arr: string[]
+) => {
+  if (str !== " " && (arr[idx - 1] ?? "") !== " ") {
+    return [...acc.slice(0, acc.length - 1), acc[acc.length - 1].concat(str)];
+  } else return [...acc, str];
+};
+
+const groupNonChordText = (
+  acc: string[],
+  str: string,
+  idx: number,
+  arr: string[]
+) => {
+  if (
+    !chordExpression.test(arr[idx]) &&
+    !chordExpression.test(arr[idx - 1] ?? "")
+  ) {
+    return [...acc.slice(0, acc.length - 1), acc[acc.length - 1].concat(str)];
+  } else return [...acc, str];
+};
+
+const newChord = (chordText: string): ElementContent =>
+  newElementNode(
+    "span",
+    [newElementNode("strong", [newTextNode(chordText.replaceAll("|", ""))])],
+    { className: styles.chord }
+  );
+
+const newChordGroup = (textWithChords: string): ElementContent =>
+  newElementNode(
+    "span",
+    textWithChords
+      .split(chordExpression)
+      .filter(stringNotEmpty)
+      .map((str) => {
+        if (chordExpression.test(str)) {
+          return newChord(str);
+        } else {
+          return newTextNode(str);
+        }
+      }),
+    { className: styles.chordGroup }
+  );
+
 export const extractChords = (
   node: Root | RootContent,
   index: number | null,
   parent: Root | Element | null
 ) => {
-  const test = "|A|You not these words |B|might |C| lo|D|se|d|";
-  // 1 or more characters given that the characters are (1) between 2 "|", and (2) are not "|"
-  const chordExpression = /(\|{1}[^\|]+\|{1})/;
-  const chordOrSpaceExpression = /(\|{1}[^\|]+\|{1}|\s)/;
-  const wordWithChordExp =
-    /(?<=(?:^|\s))([^\s\|]*\|{1}\S+\|{1}[^\s\|]*)+(?=(?:\s|$))/;
-
-  const site =
-    "https://stackoverflow.com/questions/57856398/javascript-split-with-regular-expression-return-empty-values";
   if (
     parent &&
     parent.type === "element" &&
@@ -121,65 +176,20 @@ export const extractChords = (
     node.type === "text" &&
     chordExpression.test(node.value)
   ) {
-    const newWords = node.value
+    const splitNodeValue = node.value
       .split(chordOrSpaceExpression)
-      .filter((str) => !!str)
-      .reduce(
-        (acc, str, idx, arr) => {
-          if (str !== " " && (arr[idx - 1] ?? "") !== " ") {
-            return [
-              ...acc.slice(0, acc.length - 1),
-              acc[acc.length - 1].concat(str),
-            ];
-          } else return [...acc, str];
-        },
-        [""]
-      )
-      .reduce(
-        (acc, str, idx, arr) => {
-          if (
-            !chordExpression.test(arr[idx]) &&
-            !chordExpression.test(arr[idx - 1] ?? "")
-          ) {
-            return [
-              ...acc.slice(0, acc.length - 1),
-              acc[acc.length - 1].concat(str),
-            ];
-          } else return [...acc, str];
-        },
-        [""]
-      );
-    console.log(`:::NEWWORDS::: `, newWords);
+      .filter(stringNotEmpty)
+      .reduce(groupChordsByWord, [""])
+      .reduce(groupNonChordText, [""])
+      .map((str) => {
+        if (chordExpression.test(str)) {
+          return newChordGroup(str);
+        } else {
+          return newTextNode(str);
+        }
+      });
 
-    // const replacementNodes: ElementContent[] = [];
-    // const skipIndices: number[] = [];
-    // splitValue.forEach((str, idx) => {
-    //   if (chordExpression.test(str)) {
-    //     skipIndices.push(idx + 1);
-    //     replacementNodes.push(
-    //       newElementNode(
-    //         "span",
-    //         [
-    //           newElementNode(
-    //             "span",
-    //             [
-    //               newElementNode("strong", [
-    //                 newTextNode(str.replaceAll("|", "")),
-    //               ]),
-    //             ],
-    //             { className: styles.chord }
-    //           ),
-    //           newTextNode(splitValue[idx + 1].split(" ")[0]),
-    //         ],
-    //         { className: styles.chordWrapper }
-    //       )
-    //     );
-    //   } else if (skipIndices.includes(idx))
-    //     replacementNodes.push(newTextNode(str.split(" ").slice(1).join(" ")));
-    //   else replacementNodes.push(newTextNode(str));
-    // });
-
-    // parent.children.splice(index ?? 0, 1, ...replacementNodes);
+    parent.children.splice(index ?? 0, 1, ...splitNodeValue);
   }
 };
 
