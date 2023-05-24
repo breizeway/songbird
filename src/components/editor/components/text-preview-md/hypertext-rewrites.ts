@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import {
   Element,
   ElementContent,
@@ -57,6 +58,41 @@ export const removeHeadingLinks = (
     /^h(1|2|3|4|5|6)/.test(parent.tagName)
   ) {
     parent.children = parent.children.slice(1);
+  }
+};
+
+const addToClassList = (node: ElementContent, newClassName: string) => {
+  if (node.type === "element") {
+    node.properties = {
+      ...node.properties,
+      className: classNames(node.properties?.className, newClassName),
+    };
+  }
+};
+
+export const removeEmbeddedListMargin = (
+  node: Root | RootContent,
+  _: number | null,
+  parent: Root | Element | null
+) => {
+  if (
+    parent &&
+    parent.type === "element" &&
+    parent.tagName === "li" &&
+    node.type === "element" &&
+    ["ol", "ul"].includes(node.tagName)
+  ) {
+    addToClassList(node, styles.embeddedList);
+  }
+};
+
+export const removePreCopy = (
+  node: Root | RootContent,
+  _: number | null,
+  __: Root | Element | null
+) => {
+  if (node.type === "element" && node.tagName === "pre") {
+    node.children.pop();
   }
 };
 
@@ -172,7 +208,7 @@ export const extractChords = (
   if (
     parent &&
     parent.type === "element" &&
-    ["p", "em", "strong"].includes(parent.tagName) &&
+    ["p", "em", "strong", "li", "a"].includes(parent.tagName) &&
     node.type === "text" &&
     chordExpression.test(node.value)
   ) {

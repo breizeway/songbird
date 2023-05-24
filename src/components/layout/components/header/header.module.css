@@ -1,0 +1,7 @@
+.comp {
+  @apply flex gap-3 justify-start items-center font-extrabold text-xl;
+}
+
+.logo {
+  @apply h-8 w-8;
+}

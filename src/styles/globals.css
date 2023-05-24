@@ -7,15 +7,18 @@
   --content-color-dark: #040404;
 
   --background-color-fore: #f4f4f4;
+  --background-color-highlight: #e6e6e6;
   --background-color: #e2e2e2;
   --background-color-back: #d6d6d6;
   --content-color: var(--content-color-dark);
+  --content-color-fade: #808080;
   --content-color-reverse: var(--content-color-light);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background-color-fore: #313131;
+    --background-color-highlight: #414141;
     --background-color: #262626;
     --background-color-back: #1a1a1a;
     --content-color: var(--content-color-light);

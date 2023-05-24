@@ -2,12 +2,15 @@
   @apply grow flex flex-col;
 }
 
+.controls,
+.controlGroup {
+  @apply flex gap-2;
+}
+
 .controls {
-  @apply flex gap-2 mb-4;
+  @apply justify-between mb-4;
 }
 
 .controls button {
-  @apply p-4 py-2 rounded-sm bg-amber-400 shadow-sm;
-
-  color: var(--content-color-dark);
+  @apply p-4 py-2 rounded-sm bg-amber-400 shadow-sm text-[var(--content-color-dark)];
 }

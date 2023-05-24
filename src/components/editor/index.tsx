@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
-import { TextEdit } from "../text-edit";
-import { TextPreview } from "../text-preview";
+import { TextEdit } from "./components/text-edit";
+import { TextPreview } from "./components/text-preview";
 import styles from "./editor.module.css";
 import { testMd } from "./test-md";
+import { testSong } from "./test-song";
 
 interface IEditorProps {}
 
 export const Editor = ({}: IEditorProps): JSX.Element => {
-  const [text, setText] = useState(testMd);
+  const [text, setText] = useState(testSong);
   const [resync, _setResync] = useState({});
   const triggerResync = () => _setResync({});
 
@@ -37,10 +38,30 @@ export const Editor = ({}: IEditorProps): JSX.Element => {
   return (
     <div className={styles.comp}>
       <div className={styles.controls}>
-        <button onClick={toggleTextMode}>Edit/Preview</button>
-        {textMode === TextMode.preview && (
-          <button onClick={triggerResync}>Sync</button>
-        )}
+        <div className={styles.controlGroup}>
+          <button onClick={toggleTextMode}>Edit/Preview</button>
+          {textMode === TextMode.preview && (
+            <button onClick={triggerResync}>Sync</button>
+          )}
+        </div>
+        <div className={styles.controlGroup}>
+          <button
+            onClick={() => {
+              setText(testSong);
+              triggerResync();
+            }}
+          >
+            Test Lyrics
+          </button>
+          <button
+            onClick={() => {
+              setText(testMd);
+              triggerResync();
+            }}
+          >
+            Test Markdown
+          </button>
+        </div>
       </div>
       {textMode === TextMode.edit ? (
         <TextEdit text={text} setText={setText} />
