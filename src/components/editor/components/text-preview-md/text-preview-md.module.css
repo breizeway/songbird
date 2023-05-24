@@ -45,8 +45,12 @@
 }
 
 .comp pre {
-  @apply block whitespace-pre bg-[var(--background-color-highlight)] rounded-md p-3 my-4;
+  @apply block whitespace-pre bg-[var(--background-color-highlight)] rounded-md p-3 my-4 indent-[-0.137em] overflow-x-scroll;
 }
+
+/* .comp span.code-line {
+  @apply whitespace-pre-wrap;
+} */
 
 .comp blockquote {
   @apply block px-4 my-4 border-l-4 border-[var(--background-color-highlight)];

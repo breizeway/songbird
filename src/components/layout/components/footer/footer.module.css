@@ -1,0 +1,7 @@
+.comp {
+  @apply flex justify-between items-baseline text-xs;
+}
+
+.copyright {
+  @apply text-[var(--content-color-fade)];
+}

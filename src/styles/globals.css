@@ -7,10 +7,11 @@
   --content-color-dark: #040404;
 
   --background-color-fore: #f4f4f4;
-  --background-color-highlight: #ddd;
+  --background-color-highlight: #e6e6e6;
   --background-color: #e2e2e2;
   --background-color-back: #d6d6d6;
   --content-color: var(--content-color-dark);
+  --content-color-fade: #808080;
   --content-color-reverse: var(--content-color-light);
 }
 

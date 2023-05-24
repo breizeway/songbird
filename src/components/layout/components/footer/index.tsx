@@ -8,6 +8,9 @@ export const Footer = ({}: IFooterProps): JSX.Element => {
       <a href="https://github.com/breizeway/tab-lab" target="_blank">
         about this site
       </a>
+      <span className={styles.copyright}>
+        © Tannor Breitigam {new Date().getFullYear()}
+      </span>
     </footer>
   );
 };

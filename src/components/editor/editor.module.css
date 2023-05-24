@@ -2,8 +2,13 @@
   @apply grow flex flex-col;
 }
 
+.controls,
+.controlGroup {
+  @apply flex gap-2;
+}
+
 .controls {
-  @apply flex gap-2 mb-4;
+  @apply justify-between mb-4;
 }
 
 .controls button {

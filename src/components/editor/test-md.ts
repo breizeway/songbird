@@ -7,35 +7,30 @@ export const testMd = `# Heading 1
 
 normal paragraph that is kind of long so that i can see how it looks wrapped.
 
-<br />
-
+## lyrics
 |D|You might lose your faith in |F#m|science
 |Bm|You *might* lose faith in |A|wealth
 |D|**You** might **lose** your faith in |F#m|Jesus
 |Bm|Or, or ~~lose~~ faith in your|A|self
 
-<br />
-
 paragraph with *italics*, **bold**, ***both***, \`code\` and ~~strikethrough~~.
 
-<br />
-
 \`\`\`
-codeblock with
-multiple
+multiple lined larger codeblock with
+multiple, multiple words on the second line that are reeeaaally really long
 lines
 \`\`\`
 
-> blockquate level 1
->> blockquate level 2
->>> blockquate level 3
+> blockquote level 1
+>> blockquote level 2
+>>> blockquote level 3
 
 unordered list:
 - item 1
 - item 2
 - item 3
   - item 3a
-  - item 3a\b
+  - item 3a
 
 ordered list:
 1. item 1

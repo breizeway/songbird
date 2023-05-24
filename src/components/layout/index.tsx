@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
-import { Footer } from "../footer";
-import { Header } from "../header";
+import { Footer } from "./components/footer";
+import { Header } from "./components/header";
 import styles from "./layout.module.css";
 
 export const Layout = ({ children }: PropsWithChildren): JSX.Element => {
