@@ -172,7 +172,7 @@ export const extractChords = (
   if (
     parent &&
     parent.type === "element" &&
-    ["p", "em", "strong"].includes(parent.tagName) &&
+    ["p", "em", "strong", "li"].includes(parent.tagName) &&
     node.type === "text" &&
     chordExpression.test(node.value)
   ) {

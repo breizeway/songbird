@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { useEffect, useRef, useState } from "react";
 import { ScrollVals } from "../text-preview";
 import { TextPreviewMd } from "../text-preview-md";
@@ -66,7 +67,13 @@ export const TextPreviewColumn = ({
   };
 
   return (
-    <div className={styles.comp}>
+    <div
+      className={classNames(
+        styles.comp,
+        "bg-base-fore-light",
+        "dark:bg-base-fore-dark"
+      )}
+    >
       <div className={styles.scrollContainer} ref={scrollContainerRef}>
         <div ref={previewContainerRef}>
           <TextPreviewMd

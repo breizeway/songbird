@@ -2,34 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --content-color-light: #fff;
-  --content-color-dark: #040404;
-
-  --background-color-fore: #f4f4f4;
-  --background-color: #e2e2e2;
-  --background-color-back: #d6d6d6;
-  --content-color: var(--content-color-dark);
-  --content-color-reverse: var(--content-color-light);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-color-fore: #313131;
-    --background-color: #262626;
-    --background-color-back: #1a1a1a;
-    --content-color: var(--content-color-light);
-    --content-color-reverse: var(--content-color-dark);
+@layer components {
+  .bg-main {
+    @apply bg-main-light dark:bg-main-dark;
+  }
+  .bg-back {
+    @apply bg-back-light dark:bg-back-dark;
   }
 }
 
-html {
-  background-color: var(--background-color);
-  color: var(--content-color);
+:root {
+  --text-color: #040404;
+  --text-color-dark: #fff;
+  /* --text-color-reverse: var(--text-color-dark);
+  --text-color-reverse-dark: var(--text-color); */
+
+  --bg-color-back: #d6d6d6;
+  --bg-color: #e2e2e2;
+  --bg-color-fore: #f4f4f4;
+
+  --bg-color-back-dark: #1a1a1a;
+  --bg-color-dark: #262626;
+  --bg-color-fore-dark: #313131;
 }
 
 body {
-  @apply overscroll-none;
+  @apply overscroll-none bg-base-light dark:bg-base-dark text-content-light dark:text-content-dark;
 }
 
 a {

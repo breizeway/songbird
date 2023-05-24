@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import styles from "./text-edit.module.css";
 
 interface ITextEditProps {
@@ -8,7 +9,11 @@ interface ITextEditProps {
 export const TextEdit = ({ text, setText }: ITextEditProps): JSX.Element => {
   return (
     <textarea
-      className={styles.comp}
+      className={classNames(
+        styles.comp,
+        "bg-base-back-light",
+        "dark:bg-base-back-dark"
+      )}
       value={text}
       onChange={(e) => setText(e.target.value)}
     />

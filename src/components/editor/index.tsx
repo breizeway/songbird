@@ -3,11 +3,12 @@ import { TextEdit } from "../text-edit";
 import { TextPreview } from "../text-preview";
 import styles from "./editor.module.css";
 import { testMd } from "./test-md";
+import { testSong } from "./test-song";
 
 interface IEditorProps {}
 
 export const Editor = ({}: IEditorProps): JSX.Element => {
-  const [text, setText] = useState(testMd);
+  const [text, setText] = useState(testSong);
   const [resync, _setResync] = useState({});
   const triggerResync = () => _setResync({});
 
@@ -41,6 +42,8 @@ export const Editor = ({}: IEditorProps): JSX.Element => {
         {textMode === TextMode.preview && (
           <button onClick={triggerResync}>Sync</button>
         )}
+        <button onClick={() => setText(testSong)}>Song Test</button>
+        <button onClick={() => setText(testMd)}>MD Test</button>
       </div>
       {textMode === TextMode.edit ? (
         <TextEdit text={text} setText={setText} />
