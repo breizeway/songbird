@@ -1,47 +1,49 @@
-export const testMd = `# Faith - Taking Back Sunday
-## [Verse 1]
+export const testMd = `# Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6
+
+normal paragraph that is kind of long so that i can see how it looks wrapped.
+
+<br />
+
 |D|You might lose your faith in |F#m|science
 |Bm|You *might* lose faith in |A|wealth
 |D|**You** might **lose** your faith in |F#m|Jesus
 |Bm|Or, or ~~lose~~ faith in your|A|self
 
-## [Chorus]
-But when I |D/F|let you |G|down
-|D|Look past your |A|doubt
-Just, |D/F|please, |G|please, |D|please
-Don't |A|lose your faith in |D|me
+<br />
 
-## [Verse 2]
-|D|You could lose your faith in |F#m|music
-|Bm|Or lose your faith in |A|friends
-|D|You could lose your faith in |F#m|freedom
-|Bm|Feel trapped in your own |A|skin
-Oh, but I'll be right there beside you
-(I'll be right there beside you)
-Oh, when the walls are caving in
-(I swear, oh, I'm not going anywhere)
+paragraph with *italics*, **bold**, ***both***, \`code\` and ~~strikethrough~~.
 
-## [Chorus]
-But when I let you down
-Look past your doubt
-Just please, please, please
-Don't lose your faith in me
-Please don't lose your faith in me
+<br />
 
-## [Bridge]
-Oh, oh, oh
-Oh, oh, oh
-I'm not going anywhere
-Oh, oh, oh
-I'm not going anywhere
-Oh, oh, oh
-Oh, oh, oh
-I'm not going anywhere
+\`\`\`
+codeblock with
+multiple
+lines
+\`\`\`
 
-## [Chorus]
-But when I let you down
-Look past your doubt
-Just please, please, please
-Don't lose your faith in me
-Please don't lose your faith in me
-I'm not going anywhere`;
+> blockquate level 1
+>> blockquate level 2
+>>> blockquate level 3
+
+unordered list:
+- item 1
+- item 2
+- item 3
+  - item 3a
+  - item 3a\b
+
+ordered list:
+1. item 1
+  - test
+2. item 2
+3. item 3
+  1. item 3-1
+  2. item 3-2
+
+link: [Apple](https://apple.com)
+`;

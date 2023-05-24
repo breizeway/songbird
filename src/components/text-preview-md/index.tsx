@@ -2,7 +2,9 @@ import dynamic from "next/dynamic";
 import remarkBreaks from "remark-breaks";
 import {
   extractChords,
+  removeEmbeddedListMargin,
   removeHeadingLinks,
+  removePreCopy,
   splitPs,
 } from "./hypertext-rewrites";
 import styles from "./text-preview-md.module.css";
@@ -31,8 +33,10 @@ export const TextPreviewMd = ({
         }
 
         removeHeadingLinks(node, index, parent);
-        extractChords(node, index, parent);
+        removePreCopy(node, index, parent);
+        removeEmbeddedListMargin(node, index, parent);
         splitPs(node, index, parent);
+        extractChords(node, index, parent);
       }}
     />
   );

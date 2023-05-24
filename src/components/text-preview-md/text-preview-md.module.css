@@ -2,66 +2,88 @@
   /* @apply font-mono; */
 }
 
+.comp h1,
+.comp h2,
+.comp h3,
+.comp h4,
+.comp h5,
+.comp h6 {
+  @apply my-4 font-bold;
+}
+
 .comp h1 {
-  font-size: 2em;
-  margin-top: 0.67em;
-  margin-bottom: 0.67em;
-  font-weight: bold;
+  @apply text-[1.75rem];
 }
 
 .comp h2 {
-  font-size: 1.5em;
-  margin-top: 0.83em;
-  margin-bottom: 0.83em;
-  font-weight: bold;
+  @apply text-[1.675rem];
 }
 
 .comp h3 {
-  font-size: 1.17em;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  font-weight: bold;
+  @apply text-[1.5rem];
 }
 
 .comp h4 {
-  font-size: 1em;
-  margin-top: 1.33em;
-  margin-bottom: 1.33em;
-  font-weight: bold;
+  @apply text-[1.375rem];
 }
 
 .comp h5 {
-  font-size: 0.83em;
-  margin-top: 1.67em;
-  margin-bottom: 1.67em;
-  font-weight: bold;
+  @apply text-[1.25rem];
 }
 
 .comp h6 {
-  font-size: 0.67em;
-  margin-top: 2.33em;
-  margin-bottom: 2.33em;
-  font-weight: bold;
+  @apply text-[1.125rem];
 }
 
 .comp p {
-  /* non-standard top and bottom */
-  margin-top: 0.2em;
-  margin-bottom: 0.2em;
-  text-indent: -0.5em;
-  padding-left: 0.5em;
+  @apply my-1 indent-[-0.5em] pl-2;
+  /* non-standard my */
 }
 
 .comp code {
-  @apply bg-slate-500 text-red-600 bg-opacity-50 p-1 text-sm rounded-sm;
+  @apply font-mono bg-[var(--background-color-highlight)] bg-opacity-50 p-[0.15rem] text-sm rounded-sm;
+}
+
+.comp pre {
+  @apply block whitespace-pre bg-[var(--background-color-highlight)] rounded-md p-3 my-4;
+}
+
+.comp blockquote {
+  @apply block px-4 my-4 border-l-4 border-[var(--background-color-highlight)];
+}
+
+.comp ul,
+.comp ol {
+  @apply block pl-5 my-4;
+}
+
+.comp ol.embeddedList,
+.comp ul.embeddedList {
+  @apply m-0;
+}
+
+.comp ul {
+  @apply list-disc;
+}
+
+.comp ol {
+  @apply list-decimal;
+}
+
+.comp li {
+  @apply list-item;
+}
+
+.comp a {
+  @apply underline;
 }
 
 .comp .chord {
-  @apply relative inline-block mt-8;
+  @apply relative inline-block mt-7;
 }
 
 .comp .chord strong {
-  @apply absolute bottom-3 left-2 text-amber-300;
+  @apply absolute bottom-3 left-2 text-amber-500 font-mono text-sm;
 }
 
 .comp .chordGroup {
