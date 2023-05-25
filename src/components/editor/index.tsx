@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import { TextEdit } from "./components/text-edit";
 import { TextPreview } from "./components/text-preview";
 import styles from "./editor.module.css";
-import { useAutoSync } from "./hooks/use-auto-sync";
 import { testMd } from "./test-md";
 import { testSong } from "./test-song";
 
@@ -37,10 +36,10 @@ export const Editor = ({}): JSX.Element => {
       document.body.removeEventListener("keydown", listenForShortcuts);
   }, [toggleTextMode]);
 
-  const autoSync = useAutoSync();
-  useEffect(() => {
-    triggerSync();
-  }, [autoSync]);
+  // const autoSync = useAutoSync();
+  // useEffect(() => {
+  //   triggerSync();
+  // }, [autoSync]);
 
   return (
     <div className={styles.comp}>

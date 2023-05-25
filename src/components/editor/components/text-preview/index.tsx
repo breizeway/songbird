@@ -20,6 +20,7 @@ export const TextPreview = ({
     containerHeight: 0,
     previewHeight: 0,
   });
+  console.log(`:::SCROLLHEIGHTS::: `, scrollHeights);
   const SCROLL_OVERLAP = 64;
   const INIT_SCROLL_COORD = 0;
 
@@ -38,7 +39,7 @@ export const TextPreview = ({
       }
 
       newScrollToCoords.length > 1 && newScrollToCoords.pop(); // last one will be more than previewHeight by nature of while loop
-      setScrollToCoords([0]);
+      // setScrollToCoords([0]);
       setScrollToCoords(newScrollToCoords);
     }
   }, [scrollHeights, resync]);
@@ -55,7 +56,6 @@ export const TextPreview = ({
           isLastCol={idx === scrollToCords.length - 1}
           setScrollHeights={setScrollHeights}
           scrollToCoord={coord}
-          lastScrollToCoord={scrollToCords.at(-1) ?? 0} // important for rerendering appropriately
         />
       ))}
     </div>

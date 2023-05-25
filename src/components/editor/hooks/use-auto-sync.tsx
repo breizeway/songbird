@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 
 let autoSyncReady = false;
-
 let resizeTimestamp = 0;
-let resizeJustStarted = true;
 
 export const useAutoSync = () => {
   const [autoSync, _setAutoSync] = useState<{} | null>(null);
@@ -19,12 +17,7 @@ export const useAutoSync = () => {
     const onResize = (e: UIEvent) => {
       if (e.timeStamp - resizeTimestamp > 250) {
         resizeTimestamp = e.timeStamp;
-
-        if (resizeJustStarted) {
-          resizeJustStarted = false;
-        } else {
-          setNeedsSync({});
-        }
+        setNeedsSync({});
       }
     };
     window.addEventListener("resize", onResize);
