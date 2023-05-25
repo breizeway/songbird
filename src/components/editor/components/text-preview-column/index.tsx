@@ -22,7 +22,7 @@ export const TextPreviewColumn = ({
   setScrollHeights,
   scrollToCoord,
 }: ITextPreviewColumnProps): JSX.Element => {
-  const [previewRendered, setPreviewRendered] = useState(false);
+  const [_, setPreviewRendered] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const previewContainerRef = useRef<HTMLDivElement>(null);
 
@@ -31,7 +31,6 @@ export const TextPreviewColumn = ({
       const height = !!entries[0] ? entries[0].contentRect.height : 0;
       if (height !== lastScrollContainerHeight) {
         lastScrollContainerHeight = height;
-        console.log(`:::s-HEIGHT::: `, height);
         setScrollHeights((prevScrollHeights) => ({
           ...prevScrollHeights,
           containerHeight: height,
@@ -42,7 +41,6 @@ export const TextPreviewColumn = ({
       const height = !!entries[0] ? entries[0].contentRect.height : 0;
       if (height !== lastPreviewContainerHeight) {
         lastPreviewContainerHeight = height;
-        console.log(`:::p-HEIGHT::: `, height);
         setScrollHeights((prevScrollHeights) => ({
           ...prevScrollHeights,
           previewHeight: height,
@@ -52,37 +50,20 @@ export const TextPreviewColumn = ({
 
     const scrollContainer = scrollContainerRef.current;
     const previewContainer = previewContainerRef.current;
-    if (
-      isFirstCol &&
-      // previewRendered &&
-      !!scrollContainer &&
-      !!previewContainer
-    ) {
+    if (isFirstCol && !!scrollContainer && !!previewContainer) {
       scrollContainerObserver.observe(scrollContainer);
       previewContainerObserver.observe(previewContainer);
+
+      return () => {
+        scrollContainerObserver.unobserve(scrollContainer);
+        previewContainerObserver.unobserve(previewContainer);
+      };
     }
   }, [isFirstCol, setScrollHeights]);
 
-  // calculate scroll height values and sent back to parent comp
-  // useEffect(() => {
-  //   const scrollContainer = scrollContainerRef.current;
-  //   const previewContainer = previewContainerRef.current;
-  //   if (
-  //     isFirstCol &&
-  //     previewRendered &&
-  //     !!scrollContainer &&
-  //     !!previewContainer
-  //   ) {
-  //     setScrollHeights({
-  //       containerHeight: scrollContainer.offsetHeight,
-  //       previewHeight: previewContainer.offsetHeight,
-  //     });
-  //   }
-  // }, [isFirstCol, previewRendered, setScrollHeights, lastScrollToCoord]);
-
   // scroll to the correct place after additional columns are added
   const scrollContainer = scrollContainerRef.current;
-  if (previewRendered && !!scrollContainer) {
+  if (!!scrollContainer) {
     scrollContainer.scrollTo({ top: scrollToCoord });
   }
 

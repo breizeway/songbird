@@ -36,11 +36,6 @@ export const Editor = ({}): JSX.Element => {
       document.body.removeEventListener("keydown", listenForShortcuts);
   }, [toggleTextMode]);
 
-  // const autoSync = useAutoSync();
-  // useEffect(() => {
-  //   triggerSync();
-  // }, [autoSync]);
-
   return (
     <div className={styles.comp}>
       <div className={styles.controls}>
