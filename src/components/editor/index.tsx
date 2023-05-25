@@ -2,15 +2,16 @@ import { useCallback, useEffect, useState } from "react";
 import { TextEdit } from "./components/text-edit";
 import { TextPreview } from "./components/text-preview";
 import styles from "./editor.module.css";
+import { useAutoSync } from "./hooks/use-auto-sync";
 import { testMd } from "./test-md";
 import { testSong } from "./test-song";
 
-interface IEditorProps {}
-
-export const Editor = ({}: IEditorProps): JSX.Element => {
+export const Editor = ({}): JSX.Element => {
   const [text, setText] = useState(testSong);
-  const [resync, _setResync] = useState({});
-  const triggerResync = () => _setResync({});
+  const [sync, _setSync] = useState({});
+  const triggerSync = () => {
+    _setSync({});
+  };
 
   enum TextMode {
     "edit",
@@ -35,20 +36,26 @@ export const Editor = ({}: IEditorProps): JSX.Element => {
     return () =>
       document.body.removeEventListener("keydown", listenForShortcuts);
   }, [toggleTextMode]);
+
+  const autoSync = useAutoSync();
+  useEffect(() => {
+    triggerSync();
+  }, [autoSync]);
+
   return (
     <div className={styles.comp}>
       <div className={styles.controls}>
         <div className={styles.controlGroup}>
           <button onClick={toggleTextMode}>Edit/Preview</button>
           {textMode === TextMode.preview && (
-            <button onClick={triggerResync}>Sync</button>
+            <button onClick={triggerSync}>Sync</button>
           )}
         </div>
         <div className={styles.controlGroup}>
           <button
             onClick={() => {
               setText(testSong);
-              triggerResync();
+              triggerSync();
             }}
           >
             Test Lyrics
@@ -56,7 +63,7 @@ export const Editor = ({}: IEditorProps): JSX.Element => {
           <button
             onClick={() => {
               setText(testMd);
-              triggerResync();
+              triggerSync();
             }}
           >
             Test Markdown
@@ -66,7 +73,7 @@ export const Editor = ({}: IEditorProps): JSX.Element => {
       {textMode === TextMode.edit ? (
         <TextEdit text={text} setText={setText} />
       ) : (
-        <TextPreview source={text} resync={resync} />
+        <TextPreview source={text} resync={sync} />
       )}
     </div>
   );

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { ScrollVals } from "../text-preview";
+
+import { ScrollHeights } from "../text-preview";
 import { TextPreviewMd } from "../text-preview-md";
 import styles from "./text-preview-column.module.css";
 
@@ -7,7 +8,7 @@ interface ITextPreviewColumnProps {
   source: string;
   isFirstCol: boolean;
   isLastCol: boolean;
-  setScrollVals: (scrollVals: ScrollVals) => void;
+  setScrollHeights: (scrollHeights: ScrollHeights) => void;
   scrollToCoord: number;
   lastScrollToCoord: number;
 }
@@ -16,7 +17,7 @@ export const TextPreviewColumn = ({
   source,
   isFirstCol,
   isLastCol,
-  setScrollVals,
+  setScrollHeights,
   scrollToCoord,
   lastScrollToCoord,
 }: ITextPreviewColumnProps): JSX.Element => {
@@ -34,12 +35,12 @@ export const TextPreviewColumn = ({
       !!scrollContainer &&
       !!previewContainer
     ) {
-      setScrollVals({
+      setScrollHeights({
         containerHeight: scrollContainer.offsetHeight,
-        contentHeight: previewContainer.offsetHeight,
+        previewHeight: previewContainer.offsetHeight,
       });
     }
-  }, [isFirstCol, previewRendered, setScrollVals, lastScrollToCoord]);
+  }, [isFirstCol, previewRendered, setScrollHeights, lastScrollToCoord]);
 
   // scroll to the correct place after additional columns are added
   useEffect(() => {
