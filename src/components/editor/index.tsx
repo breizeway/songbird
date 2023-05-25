@@ -67,7 +67,7 @@ export const Editor = ({}): JSX.Element => {
       {textMode === TextMode.edit ? (
         <TextEdit text={text} setText={setText} />
       ) : (
-        <TextPreview source={text} resync={sync} />
+        <TextPreview source={text} sync={sync} />
       )}
     </div>
   );

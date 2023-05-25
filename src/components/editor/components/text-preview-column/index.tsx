@@ -10,6 +10,7 @@ interface ITextPreviewColumnProps {
   isLastCol: boolean;
   setScrollHeights: Dispatch<SetStateAction<ScrollHeights>>;
   scrollToCoord: number;
+  sync: {};
 }
 
 let lastScrollContainerHeight = 0;
@@ -21,6 +22,7 @@ export const TextPreviewColumn = ({
   isLastCol,
   setScrollHeights,
   scrollToCoord,
+  sync,
 }: ITextPreviewColumnProps): JSX.Element => {
   const [_, setPreviewRendered] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -57,9 +59,12 @@ export const TextPreviewColumn = ({
       return () => {
         scrollContainerObserver.unobserve(scrollContainer);
         previewContainerObserver.unobserve(previewContainer);
+
+        lastScrollContainerHeight = 0;
+        lastPreviewContainerHeight = 0;
       };
     }
-  }, [isFirstCol, setScrollHeights]);
+  }, [isFirstCol, setScrollHeights, sync]);
 
   // scroll to the correct place after additional columns are added
   const scrollContainer = scrollContainerRef.current;
