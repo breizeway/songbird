@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { TextPreviewColumn } from "../text-preview-column";
 import styles from "./text-preview.module.css";
 
-export interface ScrollVals {
+export interface ScrollHeights {
   containerHeight: number;
-  contentHeight: number;
+  previewHeight: number;
 }
 
 interface ITextPreviewProps {
@@ -16,9 +16,9 @@ export const TextPreview = ({
   source,
   resync,
 }: ITextPreviewProps): JSX.Element => {
-  const [scrollVals, setScrollVals] = useState<ScrollVals>({
+  const [scrollHeights, setScrollHeights] = useState<ScrollHeights>({
     containerHeight: 0,
-    contentHeight: 0,
+    previewHeight: 0,
   });
   const SCROLL_OVERLAP = 64;
   const INIT_SCROLL_COORD = 0;
@@ -26,23 +26,21 @@ export const TextPreview = ({
   const [scrollToCords, setScrollToCoords] = useState([0]);
 
   useEffect(() => {
-    if (Object.values(scrollVals).every((val) => val > 0)) {
+    if (Object.values(scrollHeights).every((val) => val > 0)) {
       const newScrollToCoords: number[] = [INIT_SCROLL_COORD];
-      while (
-        (newScrollToCoords.at(-1) ?? INIT_SCROLL_COORD) <
-        scrollVals.contentHeight
-      ) {
-        const scrollToCoord =
-          (newScrollToCoords.at(-1) ?? INIT_SCROLL_COORD) +
-          scrollVals.containerHeight -
-          SCROLL_OVERLAP;
-        newScrollToCoords.push(scrollToCoord);
+      const getLastScrollCoord = () =>
+        newScrollToCoords.at(-1) ?? INIT_SCROLL_COORD;
+
+      while (getLastScrollCoord() < scrollHeights.previewHeight) {
+        const nextScrollToCoord =
+          getLastScrollCoord() + scrollHeights.containerHeight - SCROLL_OVERLAP;
+        newScrollToCoords.push(nextScrollToCoord);
       }
 
-      newScrollToCoords.pop(); // last one will be more than contentHeight by nature of while loop
+      newScrollToCoords.length > 1 && newScrollToCoords.pop(); // last one will be more than previewHeight by nature of while loop
       setScrollToCoords(newScrollToCoords);
     }
-  }, [scrollVals]);
+  }, [scrollHeights, resync]);
 
   useEffect(() => setScrollToCoords([0]), [resync]);
 
@@ -50,13 +48,12 @@ export const TextPreview = ({
     <div className={styles.comp}>
       {scrollToCords.map((coord, idx) => (
         <TextPreviewColumn
-          key={idx}
+          key={coord}
           source={source}
           isFirstCol={idx === 0}
           isLastCol={idx === scrollToCords.length - 1}
-          setScrollVals={setScrollVals}
+          setScrollHeights={setScrollHeights}
           scrollToCoord={coord}
-          lastScrollToCoord={scrollToCords.at(-1) ?? 0} // important for rerendering appropriately
         />
       ))}
     </div>

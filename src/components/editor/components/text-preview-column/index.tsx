@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from "react";
-import { ScrollVals } from "../text-preview";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+
+import { ScrollHeights } from "../text-preview";
 import { TextPreviewMd } from "../text-preview-md";
 import styles from "./text-preview-column.module.css";
 
@@ -7,47 +8,64 @@ interface ITextPreviewColumnProps {
   source: string;
   isFirstCol: boolean;
   isLastCol: boolean;
-  setScrollVals: (scrollVals: ScrollVals) => void;
+  setScrollHeights: Dispatch<SetStateAction<ScrollHeights>>;
   scrollToCoord: number;
-  lastScrollToCoord: number;
 }
+
+let lastScrollContainerHeight = 0;
+let lastPreviewContainerHeight = 0;
 
 export const TextPreviewColumn = ({
   source,
   isFirstCol,
   isLastCol,
-  setScrollVals,
+  setScrollHeights,
   scrollToCoord,
-  lastScrollToCoord,
 }: ITextPreviewColumnProps): JSX.Element => {
-  const [previewRendered, setPreviewRendered] = useState(false);
+  const [_, setPreviewRendered] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const previewContainerRef = useRef<HTMLDivElement>(null);
 
-  // calculate scroll height values and sent back to parent comp
   useEffect(() => {
+    const scrollContainerObserver = new ResizeObserver((entries) => {
+      const height = !!entries[0] ? entries[0].contentRect.height : 0;
+      if (height !== lastScrollContainerHeight) {
+        lastScrollContainerHeight = height;
+        setScrollHeights((prevScrollHeights) => ({
+          ...prevScrollHeights,
+          containerHeight: height,
+        }));
+      }
+    });
+    const previewContainerObserver = new ResizeObserver((entries) => {
+      const height = !!entries[0] ? entries[0].contentRect.height : 0;
+      if (height !== lastPreviewContainerHeight) {
+        lastPreviewContainerHeight = height;
+        setScrollHeights((prevScrollHeights) => ({
+          ...prevScrollHeights,
+          previewHeight: height,
+        }));
+      }
+    });
+
     const scrollContainer = scrollContainerRef.current;
     const previewContainer = previewContainerRef.current;
-    if (
-      isFirstCol &&
-      previewRendered &&
-      !!scrollContainer &&
-      !!previewContainer
-    ) {
-      setScrollVals({
-        containerHeight: scrollContainer.offsetHeight,
-        contentHeight: previewContainer.offsetHeight,
-      });
+    if (isFirstCol && !!scrollContainer && !!previewContainer) {
+      scrollContainerObserver.observe(scrollContainer);
+      previewContainerObserver.observe(previewContainer);
+
+      return () => {
+        scrollContainerObserver.unobserve(scrollContainer);
+        previewContainerObserver.unobserve(previewContainer);
+      };
     }
-  }, [isFirstCol, previewRendered, setScrollVals, lastScrollToCoord]);
+  }, [isFirstCol, setScrollHeights]);
 
   // scroll to the correct place after additional columns are added
-  useEffect(() => {
-    const scrollContainer = scrollContainerRef.current;
-    if (previewRendered && !!scrollContainer) {
-      scrollContainer.scrollTo({ top: scrollToCoord });
-    }
-  }, [isFirstCol, previewRendered, scrollToCoord, lastScrollToCoord]);
+  const scrollContainer = scrollContainerRef.current;
+  if (!!scrollContainer) {
+    scrollContainer.scrollTo({ top: scrollToCoord });
+  }
 
   // whitespace to add to the last column so it cans scroll down far enough
   const Whitespace = () => {
