@@ -39,16 +39,19 @@ export const TextPreview = ({
 
     newScrollToCoords.length > 1 && newScrollToCoords.pop(); // last one will be more than previewHeight by nature of while loop
 
-    // add a check here and don't set if they haven't changed
+    // TODO: add a check here and don't set if they haven't changed
+
     setScrollToCoords(newScrollToCoords);
   }, [scrollHeights]);
 
   const autoSync = useAutoSync();
   useEffect(() => {
-    setScrollHeights((prev) => ({
-      containerHeight: prev.containerHeight,
-      previewHeight: prev.containerHeight,
-    }));
+    // setTimeout(
+    //   () =>
+    setScrollToCoords([0]);
+    //   ,
+    // 1
+    // );
   }, [autoSync, sync]);
 
   return (
