@@ -1,17 +1,11 @@
 import { useEffect, useState } from "react";
 
-let autoSyncReady = false;
 let resizeTimestamp = 0;
 
 export const useAutoSync = () => {
   const [autoSync, _setAutoSync] = useState<{} | null>(null);
-
-  const triggerAutoSync = () => {
-    if (autoSyncReady) _setAutoSync({});
-    autoSyncReady = true;
-  };
-
-  const [needsSync, setNeedsSync] = useState({});
+  const [needsSync, setNeedsSync] = useState<{} | null>(null);
+  const triggerAutoSync = () => _setAutoSync({});
 
   useEffect(() => {
     const onResize = (e: UIEvent) => {
@@ -25,8 +19,10 @@ export const useAutoSync = () => {
   }, []);
 
   useEffect(() => {
-    const resyncTimeout = setTimeout(triggerAutoSync, 750);
-    return () => clearTimeout(resyncTimeout);
+    if (needsSync) {
+      const resyncTimeout = setTimeout(triggerAutoSync, 750);
+      return () => clearTimeout(resyncTimeout);
+    }
   }, [needsSync]);
 
   return autoSync;
