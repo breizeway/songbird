@@ -38,21 +38,11 @@ export const TextPreview = ({
     }
 
     newScrollToCoords.length > 1 && newScrollToCoords.pop(); // last one will be more than previewHeight by nature of while loop
-
-    // TODO: add a check here and don't set if they haven't changed
-
     setScrollToCoords(newScrollToCoords);
   }, [scrollHeights]);
 
   const autoSync = useAutoSync();
-  useEffect(() => {
-    // setTimeout(
-    //   () =>
-    setScrollToCoords([0]);
-    //   ,
-    // 1
-    // );
-  }, [autoSync, sync]);
+  useEffect(() => setScrollToCoords([0]), [autoSync, sync]);
 
   return (
     <div className={styles.comp}>
