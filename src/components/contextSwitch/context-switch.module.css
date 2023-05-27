@@ -1,0 +1,15 @@
+.comp {
+  @apply flex align-middle bg-yellow-600 rounded-sm cursor-pointer overflow-clip;
+}
+
+.context {
+  @apply flex justify-center items-center px-4 cursor-pointer;
+}
+
+.contextChecked {
+  @apply bg-amber-400 font-bold;
+}
+
+.radio {
+  @apply hidden;
+}

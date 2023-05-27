@@ -1,4 +1,8 @@
+import classNames from "classnames";
 import { useCallback, useEffect, useState } from "react";
+import syncIcon from "../../assets/sync.svg";
+import { ContextSwitch } from "../contextSwitch";
+import { Icon } from "../svg/svg";
 import { TextEdit } from "./components/text-edit";
 import { TextPreview } from "./components/text-preview";
 import styles from "./editor.module.css";
@@ -12,38 +16,59 @@ export const Editor = ({}): JSX.Element => {
     _setSync({});
   };
 
-  enum TextMode {
-    "edit",
-    "preview",
+  enum View {
+    edit = "edit",
+    preview = "preview",
   }
-  const [textMode, _setTextMode] = useState<TextMode>(
-    text ? TextMode.preview : TextMode.edit
-  );
-  const toggleTextMode = useCallback(() => {
-    _setTextMode(textMode === TextMode.edit ? TextMode.preview : TextMode.edit);
-  }, [TextMode, textMode]);
+  const [view, _setView] = useState<View>(text ? View.preview : View.edit);
+  const toggleView = useCallback(() => {
+    _setView(view === View.edit ? View.preview : View.edit);
+  }, [View, view]);
 
   useEffect(() => {
     const listenForShortcuts = (e: KeyboardEvent) => {
       if (e.metaKey && e.key === "e") {
         e.preventDefault();
-        toggleTextMode();
+        toggleView();
       }
     };
 
     document.body.addEventListener("keydown", listenForShortcuts);
     return () =>
       document.body.removeEventListener("keydown", listenForShortcuts);
-  }, [toggleTextMode]);
+  }, [toggleView]);
 
   return (
     <div className={styles.comp}>
       <div className={styles.controls}>
         <div className={styles.controlGroup}>
-          <button onClick={toggleTextMode}>Edit/Preview</button>
-          {textMode === TextMode.preview && (
-            <button onClick={triggerSync}>Sync</button>
-          )}
+          <ContextSwitch
+            name="view-mode"
+            options={[
+              {
+                id: View.edit,
+                label: "Edit",
+              },
+              {
+                id: View.preview,
+                label: "Preview",
+              },
+            ]}
+            value={view}
+            setValue={_setView}
+            className={styles.viewSwitch}
+          />
+
+          <button
+            onClick={triggerSync}
+            className={classNames(view === View.edit ? "hidden" : "")}
+          >
+            <Icon
+              srcLight={syncIcon}
+              alt="two arrows in a circle"
+              className={styles.icon}
+            />
+          </button>
         </div>
         <div className={styles.controlGroup}>
           <button
@@ -64,7 +89,7 @@ export const Editor = ({}): JSX.Element => {
           </button>
         </div>
       </div>
-      {textMode === TextMode.edit ? (
+      {view === View.edit ? (
         <TextEdit text={text} setText={setText} />
       ) : (
         <TextPreview source={text} sync={sync} />
