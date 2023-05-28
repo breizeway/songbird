@@ -20,7 +20,8 @@ export const Editor = ({}): JSX.Element => {
       "devMode",
       `${newDevMode}`
     );
-  }, [devMode]);
+    source === "" && setSource(testSong);
+  }, [devMode, source]);
   useEffect(() => {
     const savedDevMode =
       (typeof localStorage !== "undefined" ? localStorage : null)?.getItem(
