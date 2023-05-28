@@ -28,7 +28,9 @@ export const TextPreviewColumn = ({
 
   useEffect(() => {
     const scrollContainerObserver = new ResizeObserver((entries) => {
-      const height = !!entries[0] ? entries[0].contentRect.height : 0;
+      const height = Math.round(
+        !!entries[0] ? entries[0].contentRect.height : 0
+      );
       if (height !== lastScrollContainerHeight) {
         lastScrollContainerHeight = height;
         setScrollHeights((prevScrollHeights) => ({
@@ -38,7 +40,9 @@ export const TextPreviewColumn = ({
       }
     });
     const previewContainerObserver = new ResizeObserver((entries) => {
-      const height = !!entries[0] ? entries[0].contentRect.height : 0;
+      const height = Math.round(
+        !!entries[0] ? entries[0].contentRect.height : 0
+      );
       if (height !== lastPreviewContainerHeight) {
         lastPreviewContainerHeight = height;
         setScrollHeights((prevScrollHeights) => ({

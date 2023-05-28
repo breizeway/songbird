@@ -37,7 +37,7 @@ export const Editor = ({}): JSX.Element => {
       document.body.removeEventListener("keydown", listenForShortcuts);
   }, [View, view, devMode]);
 
-  const [sync, _setSync] = useState({});
+  const [_, _setSync] = useState({});
   const triggerSync = () => {
     _setSync({});
   };
@@ -101,7 +101,7 @@ export const Editor = ({}): JSX.Element => {
       {view === View.edit ? (
         <TextEdit {...{ source, setSource }} />
       ) : (
-        <TextPreview {...{ source, sync }} />
+        <TextPreview {...{ source }} />
       )}
     </div>
   );

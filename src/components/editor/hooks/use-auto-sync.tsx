@@ -11,8 +11,8 @@ export const useAutoSync = () => {
 
   useEffect(() => {
     const onResize = (e: UIEvent) => {
-      const newWidth = e.target?.innerWidth;
-      const newHeight = e.target?.innerHeight;
+      const newWidth = (e.target as Window).innerWidth;
+      const newHeight = (e.target as Window).innerHeight;
 
       if (
         e.timeStamp - resizeTimestamp > 250 &&
