@@ -12,7 +12,7 @@
 }
 
 .controls button {
-  @apply h-10 px-4 rounded-sm bg-amber-400;
+  @apply h-10 px-4 rounded bg-amber-400;
   @apply bg-gradient-to-br from-yellow-400;
 }
 
