@@ -37,8 +37,8 @@ export const ContextSwitch = ({
           <label
             htmlFor={id}
             key={id}
-            className={classNames(styles.context, {
-              [styles.contextChecked]: value === id,
+            className={classNames(styles.label, {
+              [styles.labelSelected]: value === id,
             })}
           >
             <input
@@ -46,9 +46,12 @@ export const ContextSwitch = ({
               className={styles.radio}
               checked={value === id}
               onClick={() => onChange(id)}
+              onChange={() => null}
               {...{ id, name }}
             />
-            {!!icon ? <Icon {...icon} /> : label ?? ""}
+            <span className={styles.content}>
+              {!!icon ? <Icon {...icon} /> : label ?? ""}
+            </span>
           </label>
         );
       })}

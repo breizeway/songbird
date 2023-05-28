@@ -1,13 +1,22 @@
 .comp {
-  @apply flex align-middle bg-yellow-600 rounded-sm cursor-pointer overflow-clip;
+  @apply h-10 flex align-middle cursor-pointer bg-[var(--background-color-back)] rounded-sm overflow-clip;
 }
 
-.context {
+.label {
   @apply flex justify-center items-center px-4 cursor-pointer;
 }
 
-.contextChecked {
-  @apply bg-amber-400 font-bold;
+.labelSelected {
+  @apply bg-amber-400;
+  @apply bg-gradient-to-br from-yellow-400;
+}
+
+.content {
+  @apply opacity-50 text-[var(--content-color)];
+}
+
+.labelSelected .content {
+  @apply opacity-100 text-[var(--content-color-dark)];
 }
 
 .radio {
