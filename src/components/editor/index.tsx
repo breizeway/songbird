@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import syncIcon from "../../assets/sync.svg";
 import { ContextSwitch } from "../contextSwitch";
 import { Icon } from "../svg/svg";
@@ -10,14 +10,31 @@ import { testMd } from "./test-md";
 import { testSong } from "./test-song";
 
 export const Editor = ({}): JSX.Element => {
-  const [source, setSource] = useState(testSong);
+  const [source, setSource] = useState("");
+
+  const [devMode, _setDevMode] = useState(false);
+  const toggleDevMode = useCallback(() => {
+    const newDevMode = !devMode;
+    _setDevMode(newDevMode);
+    (typeof localStorage !== "undefined" ? localStorage : null)?.setItem(
+      "devMode",
+      `${newDevMode}`
+    );
+  }, [devMode]);
+  useEffect(() => {
+    const savedDevMode =
+      (typeof localStorage !== "undefined" ? localStorage : null)?.getItem(
+        "devMode"
+      ) === "true";
+    _setDevMode(savedDevMode);
+    savedDevMode && setSource(testSong);
+  }, []);
 
   enum View {
     edit = "edit",
     preview = "preview",
   }
   const [view, setView] = useState<View>(source ? View.preview : View.edit);
-  const [devMode, setDevMode] = useState(false);
 
   useEffect(() => {
     const listenForShortcuts = (e: KeyboardEvent) => {
@@ -28,14 +45,14 @@ export const Editor = ({}): JSX.Element => {
 
       if (e.shiftKey && e.ctrlKey && e.altKey && e.key === "Î") {
         e.preventDefault();
-        setDevMode(!devMode);
+        toggleDevMode();
       }
     };
 
     document.body.addEventListener("keydown", listenForShortcuts);
     return () =>
       document.body.removeEventListener("keydown", listenForShortcuts);
-  }, [View, view, devMode]);
+  }, [View, view, toggleDevMode]);
 
   const [_, _setSync] = useState({});
   const triggerSync = () => {
@@ -61,29 +78,29 @@ export const Editor = ({}): JSX.Element => {
             setValue={setView}
             className={styles.viewSwitch}
           />
+          {devMode && (
+            <div className={styles.controlGroup + " " + "gap-2"}>
+              <button
+                className={styles.control}
+                onClick={() => {
+                  setSource(testSong);
+                  triggerSync();
+                }}
+              >
+                Test Lyrics
+              </button>
+              <button
+                className={styles.control}
+                onClick={() => {
+                  setSource(testMd);
+                  triggerSync();
+                }}
+              >
+                Test Markdown
+              </button>
+            </div>
+          )}
         </div>
-        {devMode && (
-          <div className={styles.controlGroup}>
-            <button
-              className={styles.control}
-              onClick={() => {
-                setSource(testSong);
-                triggerSync();
-              }}
-            >
-              Test Lyrics
-            </button>
-            <button
-              className={styles.control}
-              onClick={() => {
-                setSource(testMd);
-                triggerSync();
-              }}
-            >
-              Test Markdown
-            </button>
-          </div>
-        )}
         <button
           onClick={triggerSync}
           className={classNames(
