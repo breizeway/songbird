@@ -1,9 +1,9 @@
 .comp {
-  @apply h-10 flex align-middle cursor-pointer bg-[var(--background-color-back)] rounded shadow-inner;
+  @apply flex align-middle h-10 bg-[var(--background-color-back)] rounded shadow-inner cursor-pointer;
 }
 
 .label {
-  @apply flex justify-center items-center px-4 cursor-pointer rounded;
+  @apply flex justify-center items-center rounded px-4 cursor-pointer;
 }
 
 .labelSelected {

@@ -17,5 +17,5 @@
 }
 
 .icon {
-  @apply w-4;
+  @apply w-[1.1rem];
 }
