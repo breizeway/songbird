@@ -10,13 +10,9 @@ export interface ScrollHeights {
 
 interface ITextPreviewProps {
   source: string;
-  sync: {};
 }
 
-export const TextPreview = ({
-  source,
-  sync,
-}: ITextPreviewProps): JSX.Element => {
+export const TextPreview = ({ source }: ITextPreviewProps): JSX.Element => {
   const [scrollHeights, setScrollHeights] = useState<ScrollHeights>({
     containerHeight: 0,
     previewHeight: 0,
@@ -42,7 +38,7 @@ export const TextPreview = ({
   }, [scrollHeights]);
 
   const autoSync = useAutoSync();
-  useEffect(() => setScrollToCoords([0]), [autoSync, sync]);
+  useEffect(() => setScrollToCoords([0]), [autoSync]);
 
   return (
     <div className={styles.comp}>
