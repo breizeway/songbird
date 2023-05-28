@@ -11,7 +11,7 @@
   @apply justify-between text-[var(--content-color-dark)] font-bold;
 }
 
-.controls button {
+.control {
   @apply h-10 px-4 rounded bg-amber-400;
   @apply bg-gradient-to-br from-yellow-400;
 }

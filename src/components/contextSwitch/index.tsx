@@ -9,7 +9,6 @@ export interface IContextSwitchOption {
 }
 
 interface IContextSwitchProps {
-  name: string;
   options: IContextSwitchOption[];
   value: string | number;
   setValue: Function;
@@ -17,13 +16,12 @@ interface IContextSwitchProps {
 }
 
 export const ContextSwitch = ({
-  name,
   options,
   value,
   setValue,
   className,
 }: IContextSwitchProps): JSX.Element => {
-  const onChange = (id: string) => {
+  const onClick = (id: string) => {
     if (options.length === 2 && id === value) {
       const newValue = options.find((option) => option.id !== id)?.id ?? id;
       setValue(newValue);
@@ -32,29 +30,19 @@ export const ContextSwitch = ({
 
   return (
     <div className={classNames(styles.comp, className ?? "")}>
-      {options.map(({ id, label, icon }: IContextSwitchOption) => {
-        return (
-          <label
-            htmlFor={id}
-            key={id}
-            className={classNames(styles.label, {
-              [styles.labelSelected]: value === id,
-            })}
-          >
-            <input
-              type="radio"
-              className={styles.radio}
-              checked={value === id}
-              onClick={() => onChange(id)}
-              onChange={() => null}
-              {...{ id, name }}
-            />
-            <span className={styles.content}>
-              {!!icon ? <Icon {...icon} /> : label ?? ""}
-            </span>
-          </label>
-        );
-      })}
+      {options.map(({ id, label, icon }: IContextSwitchOption) => (
+        <button
+          key={id}
+          className={classNames(styles.context, {
+            [styles.contextSelected]: value === id,
+          })}
+          onClick={() => onClick(id)}
+        >
+          <span className={styles.label}>
+            {!!icon ? <Icon {...icon} /> : label ?? ""}
+          </span>
+        </button>
+      ))}
     </div>
   );
 };

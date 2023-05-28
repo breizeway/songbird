@@ -2,23 +2,19 @@
   @apply flex align-middle h-10 bg-[var(--background-color-back)] rounded shadow-inner cursor-pointer;
 }
 
-.label {
+.context {
   @apply flex justify-center items-center rounded px-4 cursor-pointer;
 }
 
-.labelSelected {
+.contextSelected {
   @apply bg-amber-400;
   @apply bg-gradient-to-br from-yellow-400;
 }
 
-.content {
+.label {
   @apply opacity-50 text-[var(--content-color)];
 }
 
-.labelSelected .content {
+.contextSelected .label {
   @apply opacity-100 text-[var(--content-color-dark)];
-}
-
-.radio {
-  @apply hidden;
 }
