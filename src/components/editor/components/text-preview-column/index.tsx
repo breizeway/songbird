@@ -31,7 +31,6 @@ export const TextPreviewColumn = ({
       const height = !!entries[0] ? entries[0].contentRect.height : 0;
       if (height !== lastScrollContainerHeight) {
         lastScrollContainerHeight = height;
-        console.log(`:::S-HEIGHT::: `, height);
         setScrollHeights((prevScrollHeights) => ({
           ...prevScrollHeights,
           containerHeight: height,
@@ -42,7 +41,6 @@ export const TextPreviewColumn = ({
       const height = !!entries[0] ? entries[0].contentRect.height : 0;
       if (height !== lastPreviewContainerHeight) {
         lastPreviewContainerHeight = height;
-        console.log(`:::P-HEIGHT::: `, height);
         setScrollHeights((prevScrollHeights) => ({
           ...prevScrollHeights,
           previewHeight: height,
