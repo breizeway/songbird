@@ -11,6 +11,9 @@ import { testSong } from "./test-song";
 
 export const Editor = ({}): JSX.Element => {
   const [source, setSource] = useState("");
+  const [sourceSelection, setSourceSelection] = useState<[number, number]>([
+    0, 0,
+  ]);
 
   const [devMode, _setDevMode] = useState(false);
   const toggleDevMode = useCallback(() => {
@@ -117,7 +120,9 @@ export const Editor = ({}): JSX.Element => {
         </button>
       </div>
       {view === View.edit ? (
-        <TextEdit {...{ source, setSource }} />
+        <TextEdit
+          {...{ source, setSource, sourceSelection, setSourceSelection }}
+        />
       ) : (
         <TextPreview {...{ source }} />
       )}
