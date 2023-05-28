@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
 let resizeTimestamp = 0;
+let lastWidth = Infinity;
+let lastHeight = Infinity;
 
 export const useAutoSync = () => {
   const [autoSync, _setAutoSync] = useState<{} | null>(null);
@@ -9,11 +11,21 @@ export const useAutoSync = () => {
 
   useEffect(() => {
     const onResize = (e: UIEvent) => {
-      if (e.timeStamp - resizeTimestamp > 250) {
+      const newWidth = e.target?.innerWidth;
+      const newHeight = e.target?.innerHeight;
+
+      if (
+        e.timeStamp - resizeTimestamp > 250 &&
+        (newWidth > lastWidth || newHeight > lastHeight)
+      ) {
         resizeTimestamp = e.timeStamp;
         setNeedsSync({});
       }
+
+      lastWidth = newWidth;
+      lastHeight = newHeight;
     };
+
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
