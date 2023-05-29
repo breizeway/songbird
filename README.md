@@ -1,4 +1,5 @@
 # SongBird
+![image](https://github.com/breizeway/songbird/assets/70126993/676cad89-6ef2-4c74-85b7-8e96e0d31088)
 
 ## About
 
@@ -16,10 +17,12 @@ In|E|stead of going |A|under
 ```
 
 will display as...
+<br/>
+![image](https://github.com/breizeway/songbird/assets/70126993/4d05b7ef-f6e6-4a7b-98af-1f0ef55d7d7b)
 
 ## Roadmap
 
-A loose plan of upcoming features and fixes can be found in the [SongBird Roadmap project]().
+A loose plan of upcoming features and fixes can be found in the [SongBird Roadmap project](https://github.com/users/breizeway/projects/1/views/1).
 
 ## Dev Guide
 
