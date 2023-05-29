@@ -1,10 +1,6 @@
 .comp {
-  @apply grow grid gap-4 h-0;
+  @apply grow grid gap-4 h-0 grid-flow-col;
 
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   grid-template-rows: minmax(100%, 100%);
-}
-
-.column {
-  @apply p-4 rounded-md overflow-scroll shadow-md;
 }

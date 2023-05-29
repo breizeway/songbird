@@ -1,5 +1,5 @@
 .comp {
-  @apply flex gap-3 justify-start items-center font-extrabold text-xl;
+  @apply flex gap-3 justify-start items-center font-extrabold text-xl mb-2;
 }
 
 .logo {

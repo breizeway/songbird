@@ -2,9 +2,12 @@
   @apply grow flex flex-col gap-4;
 }
 
-.controls,
+.controls {
+  @apply flex;
+}
+
 .controlGroup {
-  @apply flex gap-4;
+  @apply flex gap-2;
 }
 
 .controls {

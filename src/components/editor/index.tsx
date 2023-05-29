@@ -1,23 +1,30 @@
+import syncIcon from "@/assets/icons/sync.svg";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
-import syncIcon from "../../assets/sync.svg";
 import { ContextSwitch } from "../contextSwitch";
 import { Icon } from "../svg/svg";
+import { Demo } from "./components/demo";
 import { TextEdit } from "./components/text-edit";
 import { TextPreview } from "./components/text-preview";
 import styles from "./editor.module.css";
-import { testMd } from "./test-md";
-import { testSong } from "./test-song";
+
+export interface SourcePosition {
+  selectionRange: [number, number];
+  scrollTop: number;
+}
 
 export const Editor = ({}): JSX.Element => {
-  const [source, setSource] = useState(testSong);
+  const [source, setSource] = useState("");
+  const [sourcePosition, setSourcePosition] = useState<SourcePosition>({
+    selectionRange: [0, 0],
+    scrollTop: 0,
+  });
 
   enum View {
     edit = "edit",
     preview = "preview",
   }
   const [view, setView] = useState<View>(source ? View.preview : View.edit);
-  const [devMode, setDevMode] = useState(false);
 
   useEffect(() => {
     const listenForShortcuts = (e: KeyboardEvent) => {
@@ -25,17 +32,12 @@ export const Editor = ({}): JSX.Element => {
         e.preventDefault();
         setView(view === View.edit ? View.preview : View.edit);
       }
-
-      if (e.shiftKey && e.ctrlKey && e.altKey && e.key === "Î") {
-        e.preventDefault();
-        setDevMode(!devMode);
-      }
     };
 
     document.body.addEventListener("keydown", listenForShortcuts);
     return () =>
       document.body.removeEventListener("keydown", listenForShortcuts);
-  }, [View, view, devMode]);
+  }, [View, view]);
 
   const [_, _setSync] = useState({});
   const triggerSync = () => {
@@ -61,29 +63,8 @@ export const Editor = ({}): JSX.Element => {
             setValue={setView}
             className={styles.viewSwitch}
           />
+          <Demo {...{ source, setSource }} />
         </div>
-        {devMode && (
-          <div className={styles.controlGroup}>
-            <button
-              className={styles.control}
-              onClick={() => {
-                setSource(testSong);
-                triggerSync();
-              }}
-            >
-              Test Lyrics
-            </button>
-            <button
-              className={styles.control}
-              onClick={() => {
-                setSource(testMd);
-                triggerSync();
-              }}
-            >
-              Test Markdown
-            </button>
-          </div>
-        )}
         <button
           onClick={triggerSync}
           className={classNames(
@@ -99,7 +80,9 @@ export const Editor = ({}): JSX.Element => {
         </button>
       </div>
       {view === View.edit ? (
-        <TextEdit {...{ source, setSource }} />
+        <TextEdit
+          {...{ source, setSource, sourcePosition, setSourcePosition }}
+        />
       ) : (
         <TextPreview {...{ source }} />
       )}

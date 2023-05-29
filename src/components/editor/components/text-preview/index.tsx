@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAutoSync } from "../../hooks/use-auto-sync";
+import { useWindowResize } from "../../hooks/use-window-resize";
 import { TextPreviewColumn } from "../text-preview-column";
 import styles from "./text-preview.module.css";
 
@@ -37,8 +37,8 @@ export const TextPreview = ({ source }: ITextPreviewProps): JSX.Element => {
     setScrollToCoords(newScrollToCoords);
   }, [scrollHeights]);
 
-  const autoSync = useAutoSync();
-  useEffect(() => setScrollToCoords([0]), [autoSync]);
+  const { resized, isResizing } = useWindowResize();
+  useEffect(() => setScrollToCoords([0]), [resized]);
 
   return (
     <div className={styles.comp}>
@@ -48,8 +48,8 @@ export const TextPreview = ({ source }: ITextPreviewProps): JSX.Element => {
           source={source}
           isFirstCol={idx === 0}
           isLastCol={idx === scrollToCords.length - 1}
-          setScrollHeights={setScrollHeights}
           scrollToCoord={coord}
+          {...{ isResizing, setScrollHeights }}
         />
       ))}
     </div>
