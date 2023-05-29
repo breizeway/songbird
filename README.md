@@ -1,6 +1,6 @@
-![image](https://github.com/breizeway/songbird/assets/70126993/676cad89-6ef2-4c74-85b7-8e96e0d31088)
+# [SongBird](https://songbird.tannor.net)
 
-Live site: [songbird.tannor.net](https://songbird.tannor.net)
+![image](https://github.com/breizeway/songbird/assets/70126993/676cad89-6ef2-4c74-85b7-8e96e0d31088)
 
 ## About
 
