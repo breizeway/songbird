@@ -10,6 +10,7 @@ interface ITextPreviewColumnProps {
   isLastCol: boolean;
   setScrollHeights: Dispatch<SetStateAction<ScrollHeights>>;
   scrollToCoord: number;
+  isResizing: boolean;
 }
 
 let lastScrollContainerHeight = 0;
@@ -21,6 +22,7 @@ export const TextPreviewColumn = ({
   isLastCol,
   setScrollHeights,
   scrollToCoord,
+  isResizing,
 }: ITextPreviewColumnProps): JSX.Element => {
   const [_, setPreviewRendered] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -31,7 +33,7 @@ export const TextPreviewColumn = ({
       const height = Math.round(
         !!entries[0] ? entries[0].contentRect.height : 0
       );
-      if (height !== lastScrollContainerHeight) {
+      if (height !== lastScrollContainerHeight && !isResizing) {
         lastScrollContainerHeight = height;
         setScrollHeights((prevScrollHeights) => ({
           ...prevScrollHeights,
@@ -43,7 +45,7 @@ export const TextPreviewColumn = ({
       const height = Math.round(
         !!entries[0] ? entries[0].contentRect.height : 0
       );
-      if (height !== lastPreviewContainerHeight) {
+      if (height !== lastPreviewContainerHeight && !isResizing) {
         lastPreviewContainerHeight = height;
         setScrollHeights((prevScrollHeights) => ({
           ...prevScrollHeights,
@@ -66,7 +68,7 @@ export const TextPreviewColumn = ({
         lastPreviewContainerHeight = 0;
       };
     }
-  }, [isFirstCol, setScrollHeights, isLastCol]);
+  }, [isFirstCol, setScrollHeights, isLastCol, isResizing]);
 
   // scroll to the correct place after additional columns are added
   const scrollContainer = scrollContainerRef.current;
