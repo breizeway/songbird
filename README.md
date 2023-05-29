@@ -1,5 +1,6 @@
-# SongBird
 ![image](https://github.com/breizeway/songbird/assets/70126993/676cad89-6ef2-4c74-85b7-8e96e0d31088)
+
+Live site: [songbird.tannor.net](https://songbird.tannor.net)
 
 ## About
 
@@ -7,7 +8,7 @@ The problem: When jamming with friends I like to display the entirety of a songs
 
 Enter SongBird. A simple markdown editor and previewer that always displays the entirety of the text at the same time. When you enter preview mode (or when the window is resized) the text is analyzed and the additional columns are generated and scrolled to the correct location so that all text is visible, each column a continuation of the previous one.
 
-It also has custom extended markdown syntax to enable chord notations in exactly the spot you want them. Use the pipe character (`|`) to denote the start and end of a chord notation. For example, the lyrics...
+The priviewer also allowes extended markdown syntax to add chord notations in exactly the spot you want them. Use the pipe character (`|`) to denote the start and end of a chord notation. For example, the lyrics...
 
 ```
 Cause I'm |E|in too |A|deep
@@ -30,7 +31,16 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ### Getting Started
 
-First, run the development server:
+First, install node modules:
+```zsh
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+Then, run the development server:
 
 ```zsh
 npm run dev
@@ -50,9 +60,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Deployment
 
-Deployed with the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Deployed with the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js. Check out [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 ## Notable Packages
 
