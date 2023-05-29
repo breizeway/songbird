@@ -3,7 +3,7 @@
 }
 
 .controls {
-  @apply flex gap-4;
+  @apply flex;
 }
 
 .controlGroup {

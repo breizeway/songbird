@@ -1,13 +1,12 @@
+import syncIcon from "@/assets/icons/sync.svg";
 import classNames from "classnames";
-import { useCallback, useEffect, useState } from "react";
-import syncIcon from "../../assets/sync.svg";
+import { useEffect, useState } from "react";
 import { ContextSwitch } from "../contextSwitch";
 import { Icon } from "../svg/svg";
+import { Demo } from "./components/demo";
 import { TextEdit } from "./components/text-edit";
 import { TextPreview } from "./components/text-preview";
 import styles from "./editor.module.css";
-import { testMd } from "./test-md";
-import { testSong } from "./test-song";
 
 export interface SourcePosition {
   selectionRange: [number, number];
@@ -21,25 +20,6 @@ export const Editor = ({}): JSX.Element => {
     scrollTop: 0,
   });
 
-  const [devMode, _setDevMode] = useState(false);
-  const toggleDevMode = useCallback(() => {
-    const newDevMode = !devMode;
-    _setDevMode(newDevMode);
-    (typeof localStorage !== "undefined" ? localStorage : null)?.setItem(
-      "devMode",
-      `${newDevMode}`
-    );
-    source === "" && setSource(testSong);
-  }, [devMode, source]);
-  useEffect(() => {
-    const savedDevMode =
-      (typeof localStorage !== "undefined" ? localStorage : null)?.getItem(
-        "devMode"
-      ) === "true";
-    _setDevMode(savedDevMode);
-    savedDevMode && setSource(testSong);
-  }, []);
-
   enum View {
     edit = "edit",
     preview = "preview",
@@ -52,17 +32,12 @@ export const Editor = ({}): JSX.Element => {
         e.preventDefault();
         setView(view === View.edit ? View.preview : View.edit);
       }
-
-      if (e.shiftKey && e.ctrlKey && e.altKey && e.key === "Î") {
-        e.preventDefault();
-        toggleDevMode();
-      }
     };
 
     document.body.addEventListener("keydown", listenForShortcuts);
     return () =>
       document.body.removeEventListener("keydown", listenForShortcuts);
-  }, [View, view, toggleDevMode]);
+  }, [View, view]);
 
   const [_, _setSync] = useState({});
   const triggerSync = () => {
@@ -88,28 +63,7 @@ export const Editor = ({}): JSX.Element => {
             setValue={setView}
             className={styles.viewSwitch}
           />
-          {devMode && (
-            <div className={styles.controlGroup + " " + "gap-2"}>
-              <button
-                className={styles.control}
-                onClick={() => {
-                  setSource(testSong);
-                  triggerSync();
-                }}
-              >
-                Test Lyrics
-              </button>
-              <button
-                className={styles.control}
-                onClick={() => {
-                  setSource(testMd);
-                  triggerSync();
-                }}
-              >
-                Test Markdown
-              </button>
-            </div>
-          )}
+          <Demo {...{ source, setSource }} />
         </div>
         <button
           onClick={triggerSync}

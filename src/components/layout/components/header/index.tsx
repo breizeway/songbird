@@ -1,5 +1,5 @@
-import logoDark from "@/assets/logo-dark.svg";
-import logoLight from "@/assets/logo-light.svg";
+import logoDark from "@/assets/icons/logo-dark.svg";
+import logoLight from "@/assets/icons/logo-light.svg";
 import { Icon } from "@/components/svg/svg";
 import styles from "./header.module.css";
 
