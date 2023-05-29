@@ -1,20 +1,21 @@
-import { useEffect, useRef } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef } from "react";
+import { SourcePosition } from "../..";
 import styles from "./text-edit.module.css";
+
+let scrollTop = 0;
 
 interface ITextEditProps {
   source: string;
   setSource: (text: string) => void;
-  sourceSelection: [number, number];
-  setSourceSelection: Function;
+  sourcePosition: SourcePosition;
+  setSourcePosition: Dispatch<SetStateAction<SourcePosition>>;
 }
-
-let selectionStart = 0;
 
 export const TextEdit = ({
   source,
   setSource,
-  sourceSelection,
-  setSourceSelection,
+  sourcePosition,
+  setSourcePosition,
 }: ITextEditProps): JSX.Element => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -22,18 +23,32 @@ export const TextEdit = ({
     const textArea = textAreaRef.current;
     if (textArea) {
       textArea.focus();
-      textArea.setSelectionRange(...sourceSelection);
+      textArea.setSelectionRange(...sourcePosition.selectionRange);
+      textArea.scrollTo({ top: sourcePosition.scrollTop });
     }
-  }, [sourceSelection]);
+  }, [sourcePosition]);
 
   useEffect(() => {
     const textArea = textAreaRef.current;
-    return () =>
-      setSourceSelection([
-        textArea?.selectionStart ?? 0,
-        textArea?.selectionEnd ?? 0,
-      ]);
-  }, [setSourceSelection]);
+    return () => {
+      if (textArea) {
+        setSourcePosition({
+          selectionRange: [textArea.selectionStart, textArea.selectionEnd],
+          scrollTop,
+        });
+      }
+    };
+  }, [setSourcePosition]);
+
+  useEffect(() => {
+    const setScrollTop = (e: Event) => {
+      if (e.currentTarget instanceof Element)
+        scrollTop = e.currentTarget.scrollTop;
+    };
+    const textArea = textAreaRef.current;
+    textArea?.addEventListener("scroll", setScrollTop);
+    return () => textArea?.removeEventListener("scroll", setScrollTop);
+  }, []);
 
   return (
     <textarea

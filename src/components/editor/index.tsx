@@ -9,11 +9,17 @@ import styles from "./editor.module.css";
 import { testMd } from "./test-md";
 import { testSong } from "./test-song";
 
+export interface SourcePosition {
+  selectionRange: [number, number];
+  scrollTop: number;
+}
+
 export const Editor = ({}): JSX.Element => {
   const [source, setSource] = useState("");
-  const [sourceSelection, setSourceSelection] = useState<[number, number]>([
-    0, 0,
-  ]);
+  const [sourcePosition, setSourcePosition] = useState<SourcePosition>({
+    selectionRange: [0, 0],
+    scrollTop: 0,
+  });
 
   const [devMode, _setDevMode] = useState(false);
   const toggleDevMode = useCallback(() => {
@@ -121,7 +127,7 @@ export const Editor = ({}): JSX.Element => {
       </div>
       {view === View.edit ? (
         <TextEdit
-          {...{ source, setSource, sourceSelection, setSourceSelection }}
+          {...{ source, setSource, sourcePosition, setSourcePosition }}
         />
       ) : (
         <TextPreview {...{ source }} />
