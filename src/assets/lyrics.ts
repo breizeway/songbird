@@ -30,21 +30,22 @@ Don't |A|lose your faith in |D|me
 (please) |G|ple|D|ase don't |A|lose your faith in |G|me
 
 ## [Bridge]
-Oh, oh, oh
-Oh, oh, oh
-I'm not going anywhere
-Oh, oh, oh
-I'm not going anywhere
-Oh, oh, oh
-Oh, oh, oh
-I'm not going anywhere
+|D/F|Oh, |G|oh, |Bm|oh
+|D/F|Oh, |G|oh, |Bm|oh
+(I'm not going anywhere)
+|D/F|Oh, |G|oh, |Bm|oh
+(I'm not going anywhere)
+|D/F|Oh, |G|oh, |Bm|oh
+|D/F|Oh, |G|oh, |Bm|oh
+(I'm not going anywhere)
 
 ## [Chorus]
-But when I let you down
-Look past your doubt
-Just please, please, please
-Don't lose your faith in me
-Please don't lose your faith in me
+But when I |D/F|let you down|G|
+|D|Look past your |A|doubt
+Just, |D/F|please (please), |G|ple|D|ase
+Don't |A|lose your faith in |D|me
+(please) |G|ple|D|ase don't |A|lose your faith in |G|me
+<br/>
 I'm not going anywhere`,
   //-------------------------------------------------------------------//
   `# In Too Deep- Sum 41
@@ -127,7 +128,7 @@ I'm |E|in too |A|deep
 |G#m|Up  |A|a-|E|bove in my |A|head|G#m|
 |A|In|E|stead of going going |A|under
 Cause I'm |E|in too |A|deep
-|G#m|And |A|I'm |A|trying to |A|keep
+|G#m|And |A|I'm |E|trying to |A|keep
 |G#m|Up  |A|a-|E|bove in my |A|head|G#m|
 |A|In|E|stead of going going |A|under
 In|A|stead of going under|E D|
