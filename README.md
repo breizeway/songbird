@@ -61,10 +61,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 - [Next.js GitHub repository](https://github.com/vercel/next.js/)
 
-## Deployment
+### Deployment
 
 Deployed with the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js. Check out [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-## Notable Packages
+### Notable Packages
 
 - [React Markdown Preview](https://www.npmjs.com/package/@uiw/react-markdown-preview)
