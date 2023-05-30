@@ -8,7 +8,7 @@ The problem: When jamming with friends I like to display the entirety of a song'
 
 Enter SongBird: A simple markdown editor for lyrics that displays the whole song at once. When you enter preview mode (or when the window is resized) the text is analyzed and the additional columns are generated and scrolled to the correct location so that all text is visible at once, each column a continuation of the previous one.
 
-The priveiwer also supports extended markdown syntax to add inline chord notations in exactly the spot you want them. Use the pipe character (`|`) to denote the start and end of a chord notation. For example, the lyrics...
+The priveiwer also supports bespoke extended markdown syntax to add inline chord notations in exactly the spot you want them. Use the pipe character (`|`) to denote the start and end of a chord notation. For example, the lyrics...
 
 ```
 Cause I'm |E|in too |A|deep
