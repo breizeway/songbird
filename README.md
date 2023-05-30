@@ -21,9 +21,12 @@ will display as...
 <br/>
 ![image](https://github.com/breizeway/songbird/assets/70126993/dd744f76-c6f1-4672-9d54-8aa57deb4488)
 
+### Things to know
+- This app is not currently optomized for mobile (and often throws an error) as it is meant to be used on a large screen. I don't see it being too useful on mobile, but I will likely fix it soon so that it at least doesn not throw an error.
+
 ## Roadmap
 
-A loose plan of upcoming features and fixes can be found in the [SongBird Roadmap project](https://github.com/users/breizeway/projects/1/views/1).
+This app is in active development; a loose plan of upcoming features and fixes can be found in the [SongBird Roadmap project](https://github.com/users/breizeway/projects/1/views/1).
 
 ## Dev Guide
 
