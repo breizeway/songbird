@@ -6,7 +6,7 @@
 
 The problem: When jamming with friends I like to display the entirety of a songs lyrics and chords on a screen, all visible at the same time. It's always annoying to set and re-set this up for each song; it takes time to align windows next to each other and scroll to the right place. Plus lyric/tab websites are always filled with ads and extra cruft and the chord notations are never quite in the right spot.
 
-Enter SongBird. A simple markdown editor and previewer that always displays the entirety of the text at the same time. When you enter preview mode (or when the window is resized) the text is analyzed and the additional columns are generated and scrolled to the correct location so that all text is visible, each column a continuation of the previous one.
+Enter SongBird: A simple markdown editor for lyrics that displays the whole song at once. When you enter preview mode (or when the window is resized) the text is analyzed and the additional columns are generated and scrolled to the correct location so that all text is visible, each column a continuation of the previous one.
 
 The priviewer also allowes extended markdown syntax to add chord notations in exactly the spot you want them. Use the pipe character (`|`) to denote the start and end of a chord notation. For example, the lyrics...
 
@@ -19,7 +19,7 @@ In|E|stead of going |A|under
 
 will display as...
 <br/>
-![image](https://github.com/breizeway/songbird/assets/70126993/4d05b7ef-f6e6-4a7b-98af-1f0ef55d7d7b)
+![image](https://github.com/breizeway/songbird/assets/70126993/dd744f76-c6f1-4672-9d54-8aa57deb4488)
 
 ## Roadmap
 
