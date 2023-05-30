@@ -23,6 +23,7 @@ will display as...
 
 ### Things to know
 - This app is not currently optomized for mobile (and often throws an error) as it is meant to be used on a large screen. I don't see it being too useful on mobile, but I will likely fix it soon so that it at least doesn not throw an error.
+- It's possible to get the previewer in a state where the columns are too numerous / to small to view, which makes it essentially unusable unless you increase window size or devrease zoom. I'll be working on a solution for this next.
 
 ## Roadmap
 
