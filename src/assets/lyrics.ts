@@ -1,52 +1,49 @@
 const lyrics: string[] = [
-  `# Faith - Taking Back Sunday
+  `# Colour - Group Love
 ## [Verse 1]
-|D|You might lose your faith in |F#m|science
-|Bm|You *might* lose your  faith in |A|wealth
-|D|**You** might **lose** your faith in |F#m|Jesus
-|Bm|Or, or ~~lose~~ faith in your|A|self
-
-## [Chorus]
-But when I |D/F|let you down|G|
-|D|Look past your |A|doubt
-Just, |D/F|please (please), |G|ple|D|ase
-Don't |A|lose your faith in |D|me
-
-## [Verse 2]
-|D|You could lose your faith in music
-Or |Bm|lose your faith in friends
-You could |F#m|lose your faith in freedom
-Feel |Bm|trapped in your own |A|skin
-Oo-|D|oh, but I'll be right there bes|F#m|ide you
-(I'll be right there beside you)
-|Bm|Oh, when the walls are caving |A|in
-(I swear, oh, I'm not going |G|anywhere)
-
-## [Chorus]
-But when I |D/F|let you down|G|
-|D|Look past your |A|doubt
-Just, |D/F|please (please), |G|ple|D|ase
-Don't |A|lose your faith in |D|me
-(please) |G|ple|D|ase don't |A|lose your faith in |G|me
+|F#| I am a man, man, man, man |A#m|up, up in the air
+And I |F#|run around, 'round, 'round, 'round this town, town
+And |A#m|act like I don't care
+|F#| So when you see me flying |A#m|by the planet's moon
+You don't |F#|need to explain if everything's changed
+Just |A|know I'm just like you
 
 ## [Bridge]
-|D/F|Oh, |G|oh, |Bm|oh
-|D/F|Oh, |G|oh, |Bm|oh
-(I'm not going anywhere)
-|D/F|Oh, |G|oh, |Bm|oh
-(I'm not going anywhere)
-|D/F|Oh, |G|oh, |Bm|oh
-|D/F|Oh, |G|oh, |Bm|oh
-(I'm not going anywhere)
+|F#|Huh, |A#m|ha
+|F#|Huh, |A#m|ha
+|F#|Huh, |A#m|ha
+|F#|Huh, |A#m|ha
+
+## [Verse 2]
+|F#| So I pull the switch, the switch, the |A#m|switch inside my head
+And I see... 
+|F#|black, black, green, and brown 
+brown, brown, brown and blue, 
+|AF#|yellow violets, red
+|F#| And suddenly a light a|A#m|ppears inside my brain
+And I |F#|think of my ways, I think of my days
+And |A#m|know that I have changed
 
 ## [Chorus]
-But when I |D/F|let you down|G|
-|D|Look past your |A|doubt
-Just, |D/F|please (please), |G|ple|D|ase
-Don't |A|lose your faith in |D|me
-(please) |G|ple|D|ase don't |A|lose your faith in |G|me
-<br/>
-I'm not going anywhere`,
+|F#| It's the colors you ha-|A#m|ave
+No need to be sa-|F#|ad
+It really ain't tha-|A#m|at bad
+|F#| It's the colors you ha-|A#m|ave
+No need to be sa-|F#|ad
+You've still got your ha-|A#m|ands
+
+## [Verse 3]
+|F#| So mistress, mistress, have you |A#m|been up to the roof?
+He |F#|shot himself, self, there's blood on the wall
+'Cause he |A#m|couldn't face the truth
+|F#| Oh, knock that down, leave the |A#m|ground and find some space
+And |F#|tell your friends, friends, you'll be |A#m|back again-gain
+Be|F#|fore it's too late
+
+## [Chorus]
+|F#| It's the colors you ha-|A#m|ave
+No need to be sa-|F#|ad
+It really ain't tha-|A#m|at bad`,
   //-------------------------------------------------------------------//
   `# In Too Deep- Sum 41
 ## [Intro]
@@ -140,6 +137,66 @@ In|E|stead of going |D|under a|A|gain|C|
 ## [Outro]
 |E D A C|---------x4
 |E|--x2`,
+  //-------------------------------------------------------------------//
+  `# Animals - Mike Snow
+
+## [Intro]
+|E F#m C#m|-----------x2
+
+<br />
+
+|E|There was a time when my |F#m|world was filled with
+|C#m|Darkness, darkness, darkness
+|E|Then I stopped dreaming, now I'm |F#m|supposed to fill it up
+With |C#m|something, something, something
+|E|In your eyes, I see the |F#m|eyes of somebody I knew be|C#m|fore
+Long, long, long ago
+|E|But I'm still trying to make my |F#m|mind up
+Am I |C#m|free or am I tied up?
+
+## [Chorus]
+|E|I change shapes just to |F#m|hide in this place
+But I'm |C#m|still, I'm still an animal
+|E|Nobody knows it but |F#m|me when I slip
+Yeah, I |C#m|slip, I'm still an animal
+
+<br />
+
+|E|There is a hole and I |F#m|tried to fill up with
+|C#m|Money, money, money
+|E|But it gets bigger 'til your |F#m|hopes is always
+|C#m|Running, running, running
+|E|In your eyes, I see the |F#m|eyes of somebody who |C#m|could be strong
+Tell me if I'm wrong
+|E|And now I'm pulling your dis|F#m|guise up
+|C#m|Are you free or are you tied up?
+
+## [Chorus] (x2)
+|E|I change shapes just to |F#m|hide in this place
+But I'm |C#m|still, I'm still an animal
+|E|Nobody knows it but |F#m|me when I slip
+Yeah, I |C#m|slip, I'm still an animal
+
+## [Interlude]
+|E F#m C#m|-----------x2
+
+## [Piano Solo]
+|E F#m C#m|-----------x4
+
+## [Piano and Synth]
+|E F#m C#m|-----------x2
+
+## [Chorus] (x2)
+|E|I change shapes just to |F#m|hide in this place
+But I'm |C#m|still, I'm still an animal
+|E|Nobody knows it but |F#m|me when I slip
+Yeah, I |C#m|slip, I'm still an animal
+
+## [Synth]
+|E F#m C#m|-----------x2
+
+## [Outro]
+|E F#m C#m|-----------x2`,
 ];
 
 export default lyrics;

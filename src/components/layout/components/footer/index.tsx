@@ -6,10 +6,10 @@ export const Footer = ({}: IFooterProps): JSX.Element => {
   return (
     <footer id="footer" className={styles.comp}>
       <a href="https://github.com/breizeway/tab-lab" target="_blank">
-        about this site
+        About SongBird
       </a>
       <span className={styles.copyright}>
-        © Tannor Breitigam {new Date().getFullYear()}
+        © {new Date().getFullYear()} Tannor Breitigam
       </span>
     </footer>
   );
