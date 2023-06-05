@@ -37,8 +37,8 @@ You've still got your ha-|A#m|ands
 He |F#|shot himself, self, there's blood on the wall
 'Cause he |A#m|couldn't face the truth
 |F#| Oh, knock that down, leave the |A#m|ground and find some space
-And |F#|tell your friends, friends, you'll be |A#m|back again-gain
-Be|F#|fore it's too late
+And |F#|tell your friends, friends, you'll be back again-gain
+Be|A#m|fore it's too late
 
 ## [Chorus]
 |F#| It's the colors you ha-|A#m|ave
@@ -139,7 +139,6 @@ In|E|stead of going |D|under a|A|gain|C|
 |E|--x2`,
   //-------------------------------------------------------------------//
   `# Animals - Mike Snow
-
 ## [Intro]
 |E F#m C#m|-----------x2
 
