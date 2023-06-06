@@ -1,7 +1,10 @@
 .layout {
-  @apply flex flex-col gap-4 px-6 py-4 min-h-screen max-h-screen w-screen;
+  @apply grid gap-4 px-6 py-4 h-screen min-h-screen max-h-screen w-screen;
+
+  grid-template-rows: auto minmax(0, auto) auto;
+  grid-template-columns: minmax(100%, 100%);
 }
 
 .main {
-  @apply grow flex flex-col max-h-full;
+  @apply flex flex-col;
 }

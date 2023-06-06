@@ -1,5 +1,5 @@
 .comp {
-  @apply grow grid gap-4 h-0 grid-flow-col;
+  @apply grow grid gap-4 grid-flow-col min-h-0 h-screen;
 
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   grid-template-rows: minmax(100%, 100%);
