@@ -1,5 +1,5 @@
 .comp {
-  @apply py-4 rounded-md shadow-md bg-[var(--background-color-fore)];
+  @apply rounded-md shadow-md bg-[var(--background-color-fore)];
 }
 
 .scrollContainer {
