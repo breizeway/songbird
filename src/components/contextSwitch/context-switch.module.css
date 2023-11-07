@@ -1,20 +1,20 @@
 .comp {
-  @apply flex align-middle h-10 bg-[var(--background-color-back)] rounded shadow-inner;
+  @apply relative flex align-middle h-10 bg-[var(--background-color-back)] rounded shadow-inner;
 }
 
 .context {
   @apply flex justify-center items-center rounded px-4;
 }
 
-.contextSelected {
-  @apply bg-amber-400;
-  @apply bg-gradient-to-br from-yellow-400;
+.contextActive {
+  @apply absolute pointer-events-none transition-all ease-in-out;
+  @apply bg-gradient-to-br from-yellow-400 bg-amber-400;
 }
 
-.label {
-  @apply opacity-50 text-[var(--content-color)];
+.name {
+  @apply opacity-50 text-[var(--content-color)] z-10 transition-all ease-in-out;
 }
 
-.contextSelected .label {
+.contextSelected .name {
   @apply opacity-100 text-[var(--content-color-dark)];
 }

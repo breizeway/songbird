@@ -52,11 +52,11 @@ export const Editor = ({}): JSX.Element => {
             options={[
               {
                 id: View.edit,
-                label: "Edit",
+                name: "Edit",
               },
               {
                 id: View.preview,
-                label: "Preview",
+                name: "Preview",
               },
             ]}
             value={view}
