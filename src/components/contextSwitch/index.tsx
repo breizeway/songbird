@@ -29,47 +29,47 @@ export const ContextSwitch = ({
     } else setValue(id);
   };
 
-  interface XPos {
+  interface Position {
+    top: number;
+    bottom: number;
     left: number;
     width: number;
   }
 
-  const [xPos, setXPos] = useState<XPos[]>([]);
+  const [pos, setPos] = useState<Position[]>([]);
   const compRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const comp = compRef.current;
     if (comp) {
-      setXPos(
+      setPos(
         Array.from(comp.children)
           .slice(1)
-          .reduce((ac: XPos[], c) => {
+          .reduce((ac: Position[], c) => {
             const rect = c.getBoundingClientRect();
             const left = (ac.at(-1)?.left ?? 0) + (ac.at(-1)?.width ?? 0);
             const width = rect.width;
 
-            ac.push({ left, width });
+            ac.push({ top: 0, bottom: 0, left, width });
             return ac;
           }, [])
       );
     }
   }, []);
 
-  const selectedXPos = useMemo(
-    () => xPos[options.findIndex((o) => o.id === value)],
-    [value, options, xPos]
+  const selectedPos = useMemo(
+    () => pos[options.findIndex((o) => o.id === value)],
+    [value, options, pos]
   );
-  console.log(`:::SELECTEDXPOS::: `, selectedXPos);
 
   return (
     <div className={classNames(styles.comp, className ?? "")} ref={compRef}>
       <div
         className={classNames(styles.context, styles.contextActive)}
-        style={{ top: 0, bottom: 0, ...selectedXPos }}
+        style={selectedPos}
       />
       {options.map(({ id, name, icon }, idx) => (
         <button
           key={id}
-          // className={styles.context}
           className={classNames(styles.context, {
             [styles.contextSelected]:
               options.findIndex((o) => o.id === value) === idx,
